@@ -7,8 +7,9 @@ title: テンプレート全パターン（Slidev版）
 class: text-center
 transition: slide-left
 mdc: true
-# --- デザインシステム（テンプレートの共通スタイルを Slidev 全体に適用）---
-# 明朝体は使わない／背景は白／文字は #333333／メインカラー1色（#0b2f64）／角丸・影・下線は使わない
+# デザインシステム（テンプレートの共通スタイルを Slidev 全体に適用）
+# 明朝体は使わない／背景は白／文字は #333333／メインカラー1色 #0b2f64 のみ／角丸・影・下線は使わない
+# 注意: style ブロック内では CSS コメント（/* */）を使わない（mdc パースが崩れるため）
 style: |
   .slidev-layout {
     font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
@@ -201,15 +202,9 @@ class: text-center
 <!-- ===== パターン4-B：タイトルなし（画像背景＋透過文字） ===== -->
 <!-- 画像の上に黒の透過レイヤーを重ね、白文字で可読性を確保。この面のみ白文字を許可 -->
 
-<div
-  class="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-12"
-  style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/sauna-bg.jpg'); background-size: cover; background-position: center;"
->
-
-<h1 class="!text-white">原点にしてパーフェクトなサウナ体験</h1>
-
-<h3 class="!text-white">**「バーサウナ」**</h3>
-
+<div class="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-12" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/sauna-bg.jpg'); background-size: cover; background-position: center;">
+  <h1 class="!text-white">原点にしてパーフェクトなサウナ体験</h1>
+  <h3 class="!text-white">「バーサウナ」</h3>
 </div>
 
 ---
