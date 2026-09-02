@@ -794,22 +794,125 @@ class: bg-white
 
 # 2-2. なぜ「次の単語」を高精度で予測できるのか
 
+<!-- 同じ「次単語予測」を、文脈をどこまで見て解くかの進化（n-gram / RNN・LSTM / Transformer）で比較。角丸なし、締めの注釈はSVG外、フォントは5〜6 -->
+
+<div class="flex flex-col items-center w-full">
+
+<svg viewBox="0 0 680 580" xmlns="http://www.w3.org/2000/svg" role="img" class="w-full" style="max-height: 400px;" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Noto Sans JP',sans-serif">
+<title>n-gram・RNN/LSTM・Transformerが次の単語を予測する際に、どこまで文脈を見ているかを比較する図</title>
+<desc>同じ文「先月の来館者数は大きく＿＿」を例に、n-gramは直前の数語だけ、RNN/LSTMは全体を見るが古い情報ほど薄れる、Transformerは全単語を均等に直接参照することを示す3段の比較図</desc>
+
+<defs>
+<marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M0,0 L10,5 L0,10 z" fill="#5F5E5A"/>
+</marker>
+</defs>
+
+<text x="40" y="30" font-size="6" font-weight="700" fill="#2C2C2A">① n-gram（統計的手法）：直前の数語しか見ていない</text>
+
+<rect x="40" y="52" width="80" height="38" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="1.5"/>
+<text x="80" y="75" text-anchor="middle" font-size="5" fill="#888780">先月</text>
+<rect x="130" y="52" width="80" height="38" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="1.5"/>
+<text x="170" y="75" text-anchor="middle" font-size="5" fill="#888780">の</text>
+<rect x="220" y="52" width="80" height="38" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="1.5"/>
+<text x="260" y="75" text-anchor="middle" font-size="5" fill="#888780">来館者数</text>
+<rect x="310" y="52" width="80" height="38" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/>
+<text x="350" y="75" text-anchor="middle" font-size="5" fill="#0C447C">は</text>
+<rect x="400" y="52" width="80" height="38" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/>
+<text x="440" y="75" text-anchor="middle" font-size="5" fill="#0C447C">大きく</text>
+<rect x="490" y="52" width="70" height="38" fill="#F0997B" stroke="#993C1D" stroke-width="1.5"/>
+<text x="525" y="76" text-anchor="middle" font-size="8" fill="#4A1B0C">？</text>
+<path d="M390,71 L488,71" fill="none" stroke="#185FA5" stroke-width="1.5" marker-end="url(#a1)"/>
+<path d="M300,71 L308,71" fill="none" stroke="#D3D1C7" stroke-width="1.5" stroke-dasharray="3,3"/>
+<text x="170" y="116" text-anchor="middle" font-size="5.5" fill="#888780">この範囲は見ていない</text>
+
+<line x1="40" y1="150" x2="640" y2="150" stroke="#D3D1C7" stroke-width="1"/>
+
+<text x="40" y="188" font-size="6" font-weight="700" fill="#2C2C2A">② RNN・LSTM：全体を見るが、古い情報ほど記憶が薄れる</text>
+
+<rect x="40" y="210" width="80" height="38" fill="#E6F1FB" fill-opacity="0.25" stroke="#185FA5" stroke-opacity="0.4" stroke-width="1.5"/>
+<text x="80" y="233" text-anchor="middle" font-size="5" fill="#185FA5" fill-opacity="0.6">先月</text>
+<rect x="130" y="210" width="80" height="38" fill="#E6F1FB" fill-opacity="0.4" stroke="#185FA5" stroke-opacity="0.55" stroke-width="1.5"/>
+<text x="170" y="233" text-anchor="middle" font-size="5" fill="#185FA5" fill-opacity="0.75">の</text>
+<rect x="220" y="210" width="80" height="38" fill="#E6F1FB" fill-opacity="0.6" stroke="#185FA5" stroke-opacity="0.7" stroke-width="1.5"/>
+<text x="260" y="233" text-anchor="middle" font-size="5" fill="#0C447C">来館者数</text>
+<rect x="310" y="210" width="80" height="38" fill="#E6F1FB" fill-opacity="0.8" stroke="#185FA5" stroke-width="1.5"/>
+<text x="350" y="233" text-anchor="middle" font-size="5" fill="#0C447C">は</text>
+<rect x="400" y="210" width="80" height="38" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/>
+<text x="440" y="233" text-anchor="middle" font-size="5" fill="#0C447C">大きく</text>
+<rect x="490" y="210" width="70" height="38" fill="#F0997B" stroke="#993C1D" stroke-width="1.5"/>
+<text x="525" y="234" text-anchor="middle" font-size="8" fill="#4A1B0C">？</text>
+<path d="M120,229 L128,229" fill="none" stroke="#185FA5" stroke-opacity="0.3" stroke-width="1.5" marker-end="url(#a1)"/>
+<path d="M210,229 L218,229" fill="none" stroke="#185FA5" stroke-opacity="0.45" stroke-width="1.5" marker-end="url(#a1)"/>
+<path d="M300,229 L308,229" fill="none" stroke="#185FA5" stroke-opacity="0.6" stroke-width="1.5" marker-end="url(#a1)"/>
+<path d="M390,229 L398,229" fill="none" stroke="#185FA5" stroke-opacity="0.8" stroke-width="1.5" marker-end="url(#a1)"/>
+<path d="M480,229 L488,229" fill="none" stroke="#185FA5" stroke-width="1.5" marker-end="url(#a1)"/>
+<text x="180" y="274" text-anchor="middle" font-size="5.5" fill="#888780">1語ずつ順番に読み、古い記憶ほど薄くなる</text>
+
+<line x1="40" y1="308" x2="640" y2="308" stroke="#D3D1C7" stroke-width="1"/>
+
+<text x="40" y="346" font-size="6" font-weight="700" fill="#2C2C2A">③ Transformer（Attention）：全単語を均等に、直接見る</text>
+
+<rect x="40" y="368" width="80" height="38" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/>
+<text x="80" y="391" text-anchor="middle" font-size="5" fill="#0C447C">先月</text>
+<rect x="130" y="368" width="80" height="38" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/>
+<text x="170" y="391" text-anchor="middle" font-size="5" fill="#0C447C">の</text>
+<rect x="220" y="368" width="80" height="38" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/>
+<text x="260" y="391" text-anchor="middle" font-size="5" fill="#0C447C">来館者数</text>
+<rect x="310" y="368" width="80" height="38" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/>
+<text x="350" y="391" text-anchor="middle" font-size="5" fill="#0C447C">は</text>
+<rect x="400" y="368" width="80" height="38" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/>
+<text x="440" y="391" text-anchor="middle" font-size="5" fill="#0C447C">大きく</text>
+<rect x="490" y="368" width="70" height="38" fill="#F0997B" stroke="#993C1D" stroke-width="1.5"/>
+<text x="525" y="392" text-anchor="middle" font-size="8" fill="#4A1B0C">？</text>
+<path d="M80,406 C80,445 500,455 515,408" fill="none" stroke="#185FA5" stroke-width="1.3" stroke-opacity="0.75" marker-end="url(#a1)"/>
+<path d="M170,406 C170,440 500,450 518,408" fill="none" stroke="#185FA5" stroke-width="1.3" stroke-opacity="0.75" marker-end="url(#a1)"/>
+<path d="M260,406 C260,430 490,440 522,408" fill="none" stroke="#185FA5" stroke-width="1.3" stroke-opacity="0.75" marker-end="url(#a1)"/>
+<path d="M350,406 L470,408" fill="none" stroke="#185FA5" stroke-width="1.3" stroke-opacity="0.75" marker-end="url(#a1)"/>
+<path d="M440,406 L488,407" fill="none" stroke="#185FA5" stroke-width="1.3" stroke-opacity="0.75" marker-end="url(#a1)"/>
+</svg>
+
+<div class="text-xs opacity-70 mt-2 text-center">「先月」も「大きく」も、距離に関係なく同じ強さで直接つながっている（＝Attention）。文脈が深く読めるようになり、予測精度が上がった</div>
+
+</div>
+
+<!--
+発表者ノート:
+- 「次の単語を当てる」タスク自体は3つとも共通。変わったのは文脈をどこまで見て解くか
+- ① n-gram: 直前の数語のみ（浅い文脈）
+- ② RNN/LSTM: 全体を順番に読むが古い情報ほど薄れる。1語ずつしか処理できず学習も遅い
+- ③ Transformer: 全単語を同時・距離に関係なく直接参照（深い文脈）。並列処理で大規模データを高速学習
+- 因果は「文脈が読めるようになったから精度が上がった」
+-->
+
 ---
 
-# 2-3. 主要サービスの位置づけ
+# 2-3. 結局、どれを使えばいいの？（代表的なツール）
 
-- ChatGPT
-- Claude
-- Gemini
+<div class="text-sm opacity-70 mb-4">難しい話が続いたので、ここは肩の力を抜いて。名前だけ知っておけばOKです</div>
 
----
+<div class="text-base leading-relaxed">
 
-# 2-4. LLMとGPTって？
+- **ChatGPT / Claude / Gemini** ＝ いわゆる<strong>御三家</strong>。まず触るならこの3つ。日常の文章・要約・相談はどれでも十分
+- **Claude Code** ＝ <strong>エージェントのはしり</strong>。指示すると、自分で調べて手を動かしてくれる
+- **AWS Bedrock** ＝ 自社システムに<strong>LLMを組み込みたい</strong>とき使う、クラウドの土台
+- **Harness（ハーネス）** ＝ <strong>？</strong>
 
-- **LLM（Large Language Model）**：大量のテキストで学習した、大規模な言語モデルの総称
-- **GPT（Generative Pre-trained Transformer）**：LLMを作るための代表的な技術方式のひとつ
+</div>
 
-<div class="text-xs opacity-50 mt-6">LLMという大きな括りの中に、GPTという方式がある、という関係</div>
+<div v-click class="mt-8 text-center text-xl">
+
+この「<strong>？</strong>」が、後半の主役です
+
+</div>
+
+<!--
+発表者ノート:
+- ここは受講生に近い立場で、くだけて話す。「全部覚えなくていい、名前だけ」
+- 御三家は日常用途ならどれでもOK、と安心させる
+- Claude Codeで「エージェント」という言葉に触れておく（後半L3〜の伏線）
+- Harnessをあえて「？」のままにして、第3章／後半のLoop・Harness Engineeringへ引き込む
+-->
 
 ---
 layout: section
@@ -819,38 +922,289 @@ layout: section
 ## AI活用の5段階レベル
 
 ---
-
-# 3-1. テクニカルレベル（L1〜L5）の全体地図
-
+layout: center
+class: text-center
 ---
 
-# 3-2〜3-3. ビジネスサービス／SC業務への当てはめ
+<!-- 第3章の導入パンチライン（タイトルなし／ワンメッセージ）。5段階レベルへの動機づけ -->
 
-| Level | テクニカル定義 | ビジネスサービス例 | SC業務での用途イメージ |
-|---|---|---|---|
-| L1 | チャット・プロンプト | ChatGPT, Claude, Gemini, Copilot | 議事録・文案・報告書の下書き |
-| L2 | プロンプトエンジニアリング | Claude Projects, Custom GPTs, Notion AI | SC特化FAQ、定型分析レポート自動生成 |
-| L3 | エージェント構築 | Claude Code, Devin, Make.com, Zapier AI | 売上データ取得→分析→レポート送信を自動実行 |
-| L4 | マルチエージェント連携 | AWS Bedrock Agents, LangGraph, CrewAI | 営業・施設管理・販促の横断自動化 |
-| L5 | Harness / Loop Engineering | カスタム開発のみ | SC全体のAI基盤・自律改善システム |
+# **あなたは、AIを<br>「うまく」使えていますか？**
 
----
+<div v-click class="mt-10 text-2xl">
 
-# 3-4. システム構築の基礎（一枚絵）
-
-<!-- 詳細なSDLC用語はスライドに出さず、口頭で説明する。目的は「AIエージェントは現時点では開発フェーズに最も貢献する」というメッセージを伝えること -->
-
-<div class="text-center text-xl mt-8">
-
-企画 → 設計 → 開発 → テスト → リリース → 運用
+その「<strong>うまく</strong>」を、<br>言葉で説明できますか？
 
 </div>
 
-<v-click>
+---
+layout: center
+class: text-center
+---
 
-**AIエージェントは、現時点では「開発」フェーズに最も貢献する**
+<div class="text-xl leading-relaxed">
 
-</v-click>
+「なんとなく便利」で止まっていると、<br>
+そこから先に進めない。
+
+<div v-click class="mt-8">
+
+だから、<strong>使い方に"ものさし"を持つ</strong>。<br>
+それが、これから見る<strong>5段階レベル</strong>です。
+
+</div>
+
+</div>
+
+<!--
+発表者ノート:
+- 「うまく使えていますか？」は多くの人がYesと答える。だが「うまくを言語化して」で詰まる
+- 言語化できない＝改善の方向が見えない、という気づきを与える
+- そのものさしとしてL1〜L5を提示する、と自然につなぐ
+- レベルが上＝偉い、ではない点は後のスライドで補足（手法の違いであって優劣ではない）
+-->
+
+---
+
+<!-- 3-1〜3-3: AI活用の5段階レベル。ピラミッドで該当レベルをハイライトしながら1枚ずつ説明（L1→L5） -->
+
+# 3-1. AI活用の5段階レベル ── L1
+
+<div class="grid grid-cols-2 gap-6 items-center">
+
+<div class="flex justify-center">
+<svg viewBox="0 0 760 440" xmlns="http://www.w3.org/2000/svg" role="img" class="h-90 w-auto" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Noto Sans JP',sans-serif">
+<title>AI活用5段階のピラミッド。L1をハイライト</title>
+<polygon points="380,70 428,134 332,134" fill="#B5D4F4" opacity="0.25" stroke="#185FA5" stroke-width="1.5"/>
+<polygon points="332,134 428,134 476,198 284,198" fill="#B5D4F4" opacity="0.25" stroke="#185FA5" stroke-width="1.5"/>
+<polygon points="284,198 476,198 524,262 236,262" fill="#B5D4F4" opacity="0.25" stroke="#185FA5" stroke-width="1.5"/>
+<polygon points="236,262 524,262 572,326 188,326" fill="#B5D4F4" opacity="0.25" stroke="#185FA5" stroke-width="1.5"/>
+<polygon points="188,326 572,326 620,390 140,390" fill="#D85A30" stroke="#993C1D" stroke-width="2"/>
+<text x="380" y="112" text-anchor="middle" font-size="13" font-weight="700" fill="#042C53" opacity="0.4">L5</text>
+<text x="380" y="176" text-anchor="middle" font-size="13" font-weight="700" fill="#042C53" opacity="0.4">L4</text>
+<text x="380" y="240" text-anchor="middle" font-size="13" font-weight="700" fill="#042C53" opacity="0.4">L3</text>
+<text x="380" y="304" text-anchor="middle" font-size="13" font-weight="700" fill="#042C53" opacity="0.4">L2</text>
+<text x="380" y="366" text-anchor="middle" font-size="18" font-weight="700" fill="#b30a0a">L1</text>
+</svg>
+</div>
+
+<div>
+
+## L1：チャット・プロンプト
+
+<div class="text-sm mt-3 leading-relaxed">
+
+- **やること**：AIに話しかけて、その場で答えをもらう
+- **代表ツール**：ChatGPT / Claude / Gemini / Copilot
+- **SC業務での使い方**：議事録・文案・報告書の下書き
+
+</div>
+
+<div class="text-xs opacity-60 mt-4">まずここから。誰でも今日から始められる入口</div>
+
+</div>
+
+</div>
+
+---
+
+# 3-1. AI活用の5段階レベル ── L2
+
+<div class="grid grid-cols-2 gap-6 items-center">
+
+<div class="flex justify-center">
+<svg viewBox="0 0 760 440" xmlns="http://www.w3.org/2000/svg" role="img" class="h-90 w-auto" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Noto Sans JP',sans-serif">
+<title>AI活用5段階のピラミッド。L2をハイライト</title>
+<polygon points="380,70 428,134 332,134" fill="#B5D4F4" opacity="0.25" stroke="#185FA5" stroke-width="1.5"/>
+<polygon points="332,134 428,134 476,198 284,198" fill="#B5D4F4" opacity="0.25" stroke="#185FA5" stroke-width="1.5"/>
+<polygon points="284,198 476,198 524,262 236,262" fill="#B5D4F4" opacity="0.25" stroke="#185FA5" stroke-width="1.5"/>
+<polygon points="236,262 524,262 572,326 188,326" fill="#D85A30" stroke="#993C1D" stroke-width="2"/>
+<polygon points="188,326 572,326 620,390 140,390" fill="#B5D4F4" opacity="0.25" stroke="#185FA5" stroke-width="1.5"/>
+<text x="380" y="112" text-anchor="middle" font-size="13" font-weight="700" fill="#042C53" opacity="0.4">L5</text>
+<text x="380" y="176" text-anchor="middle" font-size="13" font-weight="700" fill="#042C53" opacity="0.4">L4</text>
+<text x="380" y="240" text-anchor="middle" font-size="13" font-weight="700" fill="#042C53" opacity="0.4">L3</text>
+<text x="380" y="302" text-anchor="middle" font-size="18" font-weight="700" fill="#b30a0a">L2</text>
+<text x="380" y="366" text-anchor="middle" font-size="13" font-weight="700" fill="#042C53" opacity="0.4">L1</text>
+</svg>
+</div>
+
+<div>
+
+## L2：プロンプトエンジニアリング
+
+<div class="text-sm mt-3 leading-relaxed">
+
+- **やること**：指示や前提を作り込み、AIの出力を安定させる
+- **代表ツール**：Claude Projects / Custom GPTs / Notion AI
+- **SC業務での使い方**：SC特化FAQ、定型分析レポートの自動生成
+
+</div>
+
+<div class="text-xs opacity-60 mt-4">「毎回同じ質の答え」を引き出せるようにする段階</div>
+
+</div>
+
+</div>
+
+---
+
+# 3-1. AI活用の5段階レベル ── L3
+
+<div class="grid grid-cols-2 gap-6 items-center">
+
+<div class="flex justify-center">
+<svg viewBox="0 0 760 440" xmlns="http://www.w3.org/2000/svg" role="img" class="h-90 w-auto" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Noto Sans JP',sans-serif">
+<title>AI活用5段階のピラミッド。L3をハイライト</title>
+<polygon points="380,70 428,134 332,134" fill="#B5D4F4" opacity="0.25" stroke="#185FA5" stroke-width="1.5"/>
+<polygon points="332,134 428,134 476,198 284,198" fill="#B5D4F4" opacity="0.25" stroke="#185FA5" stroke-width="1.5"/>
+<polygon points="284,198 476,198 524,262 236,262" fill="#D85A30" stroke="#993C1D" stroke-width="2"/>
+<polygon points="236,262 524,262 572,326 188,326" fill="#B5D4F4" opacity="0.25" stroke="#185FA5" stroke-width="1.5"/>
+<polygon points="188,326 572,326 620,390 140,390" fill="#B5D4F4" opacity="0.25" stroke="#185FA5" stroke-width="1.5"/>
+<text x="380" y="112" text-anchor="middle" font-size="13" font-weight="700" fill="#042C53" opacity="0.4">L5</text>
+<text x="380" y="176" text-anchor="middle" font-size="13" font-weight="700" fill="#042C53" opacity="0.4">L4</text>
+<text x="380" y="238" text-anchor="middle" font-size="18" font-weight="700" fill="#b30a0a">L3</text>
+<text x="380" y="304" text-anchor="middle" font-size="13" font-weight="700" fill="#042C53" opacity="0.4">L2</text>
+<text x="380" y="366" text-anchor="middle" font-size="13" font-weight="700" fill="#042C53" opacity="0.4">L1</text>
+</svg>
+</div>
+
+<div>
+
+## L3：エージェント構築
+
+<div class="text-sm mt-3 leading-relaxed">
+
+- **やること**：AIに道具を持たせ、一連の作業を自分で実行させる
+- **代表ツール**：Claude Code / Devin / Make.com / Zapier AI
+- **SC業務での使い方**：売上データ取得 → 分析 → レポート送信を自動実行
+
+</div>
+
+<div class="text-xs opacity-60 mt-4">「相談相手」から「作業してくれる相手」へ変わる段階</div>
+
+</div>
+
+</div>
+
+---
+
+# 3-1. AI活用の5段階レベル ── L4
+
+<div class="grid grid-cols-2 gap-6 items-center">
+
+<div class="flex justify-center">
+<svg viewBox="0 0 760 440" xmlns="http://www.w3.org/2000/svg" role="img" class="h-90 w-auto" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Noto Sans JP',sans-serif">
+<title>AI活用5段階のピラミッド。L4をハイライト</title>
+<polygon points="380,70 428,134 332,134" fill="#B5D4F4" opacity="0.25" stroke="#185FA5" stroke-width="1.5"/>
+<polygon points="332,134 428,134 476,198 284,198" fill="#D85A30" stroke="#993C1D" stroke-width="2"/>
+<polygon points="284,198 476,198 524,262 236,262" fill="#B5D4F4" opacity="0.25" stroke="#185FA5" stroke-width="1.5"/>
+<polygon points="236,262 524,262 572,326 188,326" fill="#B5D4F4" opacity="0.25" stroke="#185FA5" stroke-width="1.5"/>
+<polygon points="188,326 572,326 620,390 140,390" fill="#B5D4F4" opacity="0.25" stroke="#185FA5" stroke-width="1.5"/>
+<text x="380" y="112" text-anchor="middle" font-size="13" font-weight="700" fill="#042C53" opacity="0.4">L5</text>
+<text x="380" y="174" text-anchor="middle" font-size="18" font-weight="700" fill="#b30a0a">L4</text>
+<text x="380" y="240" text-anchor="middle" font-size="13" font-weight="700" fill="#042C53" opacity="0.4">L3</text>
+<text x="380" y="304" text-anchor="middle" font-size="13" font-weight="700" fill="#042C53" opacity="0.4">L2</text>
+<text x="380" y="366" text-anchor="middle" font-size="13" font-weight="700" fill="#042C53" opacity="0.4">L1</text>
+</svg>
+</div>
+
+<div>
+
+## L4：マルチエージェント連携
+
+<div class="text-sm mt-3 leading-relaxed">
+
+- **やること**：役割の違う複数のAIを連携させ、横断的に処理する
+- **代表ツール**：AWS Bedrock Agents / LangGraph / CrewAI
+- **SC業務での使い方**：営業・施設管理・販促を横断して自動化
+
+</div>
+
+<div class="text-xs opacity-60 mt-4">1体では手に負えない、複数部門をまたぐ業務の段階</div>
+
+</div>
+
+</div>
+
+---
+
+# 3-1. AI活用の5段階レベル ── L5
+
+<div class="grid grid-cols-2 gap-6 items-center">
+
+<div class="flex justify-center">
+<svg viewBox="0 0 760 440" xmlns="http://www.w3.org/2000/svg" role="img" class="h-90 w-auto" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Noto Sans JP',sans-serif">
+<title>AI活用5段階のピラミッド。L5をハイライト</title>
+<polygon points="380,70 428,134 332,134" fill="#D85A30" stroke="#993C1D" stroke-width="2"/>
+<polygon points="332,134 428,134 476,198 284,198" fill="#B5D4F4" opacity="0.25" stroke="#185FA5" stroke-width="1.5"/>
+<polygon points="284,198 476,198 524,262 236,262" fill="#B5D4F4" opacity="0.25" stroke="#185FA5" stroke-width="1.5"/>
+<polygon points="236,262 524,262 572,326 188,326" fill="#B5D4F4" opacity="0.25" stroke="#185FA5" stroke-width="1.5"/>
+<polygon points="188,326 572,326 620,390 140,390" fill="#B5D4F4" opacity="0.25" stroke="#185FA5" stroke-width="1.5"/>
+<text x="380" y="116" text-anchor="middle" font-size="15" font-weight="700" fill="#b30a0a">L5</text>
+<text x="380" y="176" text-anchor="middle" font-size="13" font-weight="700" fill="#042C53" opacity="0.4">L4</text>
+<text x="380" y="240" text-anchor="middle" font-size="13" font-weight="700" fill="#042C53" opacity="0.4">L3</text>
+<text x="380" y="304" text-anchor="middle" font-size="13" font-weight="700" fill="#042C53" opacity="0.4">L2</text>
+<text x="380" y="366" text-anchor="middle" font-size="13" font-weight="700" fill="#042C53" opacity="0.4">L1</text>
+</svg>
+</div>
+
+<div>
+
+## L5：Harness / Loop Engineering
+
+<div class="text-sm mt-3 leading-relaxed">
+
+- **やること**：AIが安全に自律動作する“足場”を設計し、改善が回り続ける仕組みを作る
+- **代表ツール**：カスタム開発が中心（既製品では届かない領域）
+- **SC業務での使い方**：SC全体のAI基盤・自律改善システム
+
+</div>
+
+<div class="text-xs opacity-60 mt-4">前半で「？」にしたHarnessは、ここ。後半で詳しく扱う</div>
+
+</div>
+
+</div>
+
+---
+layout: default
+class: bg-white
+---
+
+# ただし、レベルは「優劣」ではない
+
+<div class="text-lg leading-relaxed mt-6">
+
+<div v-click>
+
+**1.** レベルが高い＝偉い、ではない。<strong>どのレベルも、目的に合えば効果的</strong>。
+
+</div>
+
+<div v-click class="mt-6">
+
+**2.** L1で十分な仕事に、わざわざL4を持ち出す必要はない。<strong>作業に合ったレベルを選ぶ</strong>のが本質。
+
+</div>
+
+<div v-click class="mt-8 text-center text-xl">
+
+その上で、私たちが最終的に目指したいのは<br>
+<h2><strong>L5＝Harness and Loop <br> 自律的に改善が回り続ける仕組み</strong></h2>
+
+</div>
+
+</div>
+
+<!--
+発表者ノート:
+- まず「上が偉いわけではない」と明言し、レベル表を序列と誤解させない
+- ただし到達点として目指す価値があるのはL5（Harness）だ、と方向性は示す
+- この“優劣ではないが目指す先はある”という締めが、次のシステム構築（ウォーターフォール/アジャイル）とHarnessの話への橋渡しになる
+-->
+
+---
+
+それでは、より具体的に各レイヤーでどのようにAIを使っていくかを整理する
 
 ---
 
@@ -865,6 +1219,9 @@ layout: section
 
 <div class="text-xs opacity-50 mt-6">出典: Addy Osmani "Own the Outer Loop"（2026/7）</div>
 
+Q.ちょっとまって、なんでそこまでループにこだわるの？
+
+A.将来的に人間がボトルネックになるから
 ---
 
 # 3-6. 人間の役割の変化：HITLからHOTLへ
@@ -886,6 +1243,10 @@ layout: section
 出典: Addy Osmani "Own the Outer Loop"（"HOTL"という語自体は原文では未使用。解釈的まとめ）<br>
 補足: Anthropic「2026 Agentic Coding Trends Report」では、AI委任タスクの80〜100%で能動的な監視が継続。関与の「量」ではなく「位置」が変化している
 </div>
+
+---
+
+AIとのキャッチボールはやめて、AIが動くためのルールを設計する
 
 ---
 
@@ -921,9 +1282,36 @@ layout: section
 
 ---
 
+そうは言っても、AI活用＝システム開発ではあるので、それなりの型がある
+
+---
+
+# 3-4. システム構築の基礎（一枚絵）
+
+ここでアジャイル・ウォーターホールの簡単な図を出したい
+
+<!-- 詳細なSDLC用語はスライドに出さず、口頭で説明する。目的は「AIエージェントは現時点では開発フェーズに最も貢献する」というメッセージを伝えること -->
+
+<div class="text-center text-xl mt-8">
+
+企画 → 設計 → 開発 → テスト → リリース → 運用
+
+</div>
+
+<v-click>
+
+**AIエージェントは、現時点では「開発」フェーズに最も貢献する**
+
+</v-click>
+
+---
+
 # 3-9. 実例：ビジネスアイデアをAIと一緒に構造化する
 
 早崎さん自身が新規事業を検討した際、Claudeと対話しながら思考を進めた実例
+
+現状、スマートデバイスとAIを用いた効率化を目指している
+https://www.guide-series.com/products/guide01/
 
 <v-click>
 
@@ -987,54 +1375,13 @@ layout: section
 </v-click>
 
 ---
-layout: center
----
-
-# 【参考：簡易版パターン】
-
-ここまでの内容（3-1〜3-14）が重すぎる場合の代替案。協会レビューを踏まえて採否を判断
-
----
-
-# B-1. 一般的な機械学習と生成AIの違い
-
-<!-- 簡易版：詳細版（4-1〜4-8）の代わりに使う場合のスライド -->
-
----
-
-# B-2. GPTとは何ですか？
-
-<!-- 簡易版：詳細版（3-4, 4-1〜4-8）の代わりに使う場合のスライド -->
-
----
-layout: section
----
 
 # 第5章
-## SC業界×AI――課題と可能性
-
----
-
-# 【協会レビュー待ち】具体的な課題・事例は追記予定
-
-<!-- 早崎さん自身のリサーチでは、一般的な小売業の課題（在庫管理・発注自動化等）止まりで、SC特有の核心的な課題に踏み込めなかった。一度協会運営にレビューしてもらい、フィードバックを踏まえて具体例を追記する方針 -->
-
-- 5-1. SC運営の課題マップ（施設管理・営業・販促・バックオフィス）
-- 5-2. AIが解決できること・できないこと
-- 5-3. 国内外のSC×AI活用事例
-
-<div class="text-xs opacity-50 mt-6">協会運営レビュー後に反映</div>
-
----
-layout: section
----
-
-# 第6章
 ## AIと向き合う心構えと実装の注意点
 
 ---
 
-# 6-1. ワークスロップへの対応
+# 5-1. ワークスロップへの対応
 
 AIが生成した、体裁は整っているが中身の薄い成果物のことを「ワークスロップ（workslop）」と呼ぶ
 
@@ -1050,7 +1397,7 @@ AIが生成した、体裁は整っているが中身の薄い成果物のこと
 
 ---
 
-# 6-2. AIの出力をどう評価するか
+# 5-2. AIの出力をどう評価するか
 
 - 生成AIは「それらしい答え」を出す。正しいとは限らない
 - 出力を検証できるのは、**自分自身のドメイン知識だけ**
@@ -1058,7 +1405,7 @@ AIが生成した、体裁は整っているが中身の薄い成果物のこと
 
 ---
 
-# 6-3. 専門性が議論の質を変えた瞬間
+# 5-3. 専門性が議論の質を変えた瞬間
 
 第4章で紹介した実例でも、同じことが起きていた
 
@@ -1077,7 +1424,7 @@ AIが生成した、体裁は整っているが中身の薄い成果物のこと
 
 ---
 
-# 6-4. AIに頼る前に揃えるべきもの
+# 5-4. AIに頼る前に揃えるべきもの
 
 - 定量的なデータの蓄積（来館者数・売上・稼働率など）
 - 業務プロセスの言語化・標準化
@@ -1085,7 +1432,7 @@ AIが生成した、体裁は整っているが中身の薄い成果物のこと
 
 ---
 
-# 6-5. PoC実装のバッドプラクティス
+# 5-5. PoC実装のバッドプラクティス
 
 - **作って終わり**：使う人を想定せずに作ったシステムは使われない
 - **ユーザー視点の欠如**：技術が優れていても現場に馴染まなければ意味がない
@@ -1104,53 +1451,6 @@ AIが生成した、体裁は整っているが中身の薄い成果物のこと
 layout: section
 ---
 
-# 第7章
-## アイデアソンへ向けて
-
----
-
-# 7-1. ループ設計ワークシート
-
-自分のビジネスにAIを組み込むなら、という視点で4つを埋めていく
-
-| 項目 | 問い |
-|---|---|
-| ①業務のどの部分か | どの業務を対象にするか |
-| ②AIエージェントの役割 | AIに何を任せるか |
-| ③人間の役割 | 最終的に誰が・何を判断するか |
-| ④実装するなら何を使うか | 第4章のL1〜L5でいうとどのレベルか |
-
-<div class="text-xs opacity-50 mt-4">第4章で紹介した実例と同じ枠組み</div>
-
----
-
-# 7-2. グループワーク説明
-
----
-
-# 7-3. ディスカッション
-
-<!-- パンチライン2パターン。当日どちらを採用するか判断する -->
-
-<!-- パターンA：問いそのものを投げる形 -->
-<v-click>
-
-**あなたが思い描けるループとは、どんなものですか？**
-
-</v-click>
-
-<div class="text-xs opacity-60 mt-4">答えではなく、問いを持ち帰ってほしい</div>
-
-<!--
-パターンB：冒頭「AIに関する質問が増えること」への回収として
-<v-click>
-
-**今日、AIへの問いはいくつ増えましたか？**
-
-</v-click>
-
-<div class="text-xs opacity-60 mt-4">増えた問いの数だけ、次の一歩がある</div>
--->
 
 ---
 layout: center
