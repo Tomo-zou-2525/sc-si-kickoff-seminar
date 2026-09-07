@@ -46,14 +46,6 @@ SC業界特有の課題にAIを当てはめる思考を身につける
 
 ---
 
-# はじめに
-
-- 自己紹介
-- 本日のゴール
-- なぜ今、SC業界にAIなのか（問題提起）
-
----
-
 # 自己紹介
 
 <div class="grid grid-cols-2 gap-8 items-center mt-4">
@@ -89,17 +81,18 @@ SC業界特有の課題にAIを当てはめる思考を身につける
 
 # 本セミナーの全体像
 
-<div class="grid grid-cols-2 gap-6 mt-4">
-- 第一章：AIを知る
-  - AIとはなにか？
-  - AIの活用とは？
-  - 段階別活用レベル
-- 第二章：AIを上手く使う
-  - アウトプットとの付き合い方
-  - ループ設計
-- 第三章：自分でもやってみよう
+<div class="text-base leading-relaxed mt-4">
+
+- **第1章** AIとは何か ── 定義と歴史
+- **第2章** 生成AIとは何か ── 仕組みを知る
+- **第3章** AI活用の5段階レベル ── 使い方の地図
+- **第4章** Loop / Harness Engineering ── より深く理解する
+- **第5章** AIと向き合う心構えと注意点
+- **第6章** アイデアソンへ向けて ── 自分でやってみる
 
 </div>
+
+<div class="text-xs opacity-60 mt-4">前半で「知り」、後半で「使う・考える」。最後に自分の業務で試すところまで。</div>
 
 ---
 
@@ -159,22 +152,6 @@ AI×SC業界の情報収集
 -->
 
 ---
-
-# 判断の軸を持つ
-
-AIを活用したDXは、対象業務によって評価軸が異なる
-
-| 対象 | 主な評価軸 |
-|---|---|
-| **既存業務のDX** | 工数削減率・コスト削減額・処理速度の向上 |
-| **新規業務のDX** | 学習データの蓄積量・知見のドキュメント化・現場採用率 |
-
-<v-click>
-
-新規業務では即時のROIを求めない。**蓄積されること自体が成果**
-ただし「蓄積されているが使われていない」は成功ではない
-
-</v-click>
 
 ---
 layout: section
@@ -965,6 +942,43 @@ class: text-center
 
 ---
 
+# その前に：「エージェント」とは？
+
+<div class="text-sm opacity-70 mb-4">この後よく出てくる言葉なので、ここで一度だけ整理します</div>
+
+<div class="text-base leading-relaxed">
+
+<div v-click>
+
+**チャット型AI**（ChatGPT等）＝ 質問に<strong>言葉で答える</strong >。答えたら終わり。
+
+</div>
+
+<div v-click class="mt-5">
+
+**エージェント型AI**（Claude Code等）＝ 目的を渡すと、<strong>自分で調べ・道具を使い・手を動かす</strong>。ファイルを読む、プログラムを動かす、検索する、を<strong>繰り返して</strong>ゴールに近づく。
+
+</div>
+
+</div>
+
+<div v-click class="text-center mt-6 text-lg">
+
+ひとことで言えば、<strong>エージェント＝「道具を使いながら、繰り返し働くAI」</strong>
+
+</div>
+
+<div class="text-xs opacity-50 mt-4">参考: Mitchell Hashimoto「エージェントとは、ループの中でツールを呼べるLLM」</div>
+
+<!--
+発表者ノート:
+- L3以降が「エージェント構築」なので、その前に用語を一度だけ押さえる
+- 「答えて終わり」か「動いて働く」か、の対比で直感的に
+- この「繰り返し働く」がのちのループの話につながる伏線
+-->
+
+---
+
 <!-- 3-1〜3-3: AI活用の5段階レベル。ピラミッドで該当レベルをハイライトしながら1枚ずつ説明（L1→L5） -->
 
 # 3-1. AI活用の5段階レベル ── L1
@@ -1409,7 +1423,65 @@ AIが速く回せるほど、1つずつ承認する人間が追いつかなく�
 
 ---
 
-# 4-7. システム構築の基礎（一枚絵）
+# 4-7. 部品を組み合わせると、こう回る
+
+<div class="text-sm opacity-70 mb-1">例：自動で見つけて、作って、チェックして、人は「採用するか」だけ決める（クラウドで動き続ける）</div>
+
+<!-- プロアクティブループの円環図（インラインSVG）。ボックスを大きく取り、矢印はボックスの外側を通してテキストと重ねない -->
+
+<div class="flex justify-center w-full">
+
+<svg viewBox="0 0 960 430" xmlns="http://www.w3.org/2000/svg" role="img" class="w-full" style="max-height: 360px;" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Noto Sans JP',sans-serif">
+<title>プロアクティブループの循環図</title>
+<desc>トリガーで起動し、メインエージェントが作成、第2のエージェントがレビュー、人間は採用可否を決める、という循環を示す図</desc>
+
+<defs>
+<marker id="lp" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+<path d="M0,0 L10,5 L0,10 z" fill="#5F5E5A"/>
+</marker>
+</defs>
+
+<rect x="360" y="30" width="240" height="74" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="1.5"/>
+<text x="480" y="60" text-anchor="middle" font-size="9" font-weight="700" fill="#993C1D">① トリガー</text>
+<text x="480" y="80" text-anchor="middle" font-size="7" fill="#2C2C2A">決めた時刻に自動で起動</text>
+<text x="480" y="94" text-anchor="middle" font-size="7" fill="#2C2C2A">（例：毎朝チャットを確認）</text>
+
+<rect x="690" y="178" width="240" height="74" fill="#D85A30" stroke="#993C1D" stroke-width="1.5"/>
+<text x="810" y="208" text-anchor="middle" font-size="9" font-weight="700" fill="#FFFFFF">② メインエージェント</text>
+<text x="810" y="228" text-anchor="middle" font-size="7" fill="#FCE3D8">完了指標を満たすまで</text>
+<text x="810" y="242" text-anchor="middle" font-size="7" fill="#FCE3D8">作業を繰り返す</text>
+
+<rect x="360" y="326" width="240" height="74" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/>
+<text x="480" y="356" text-anchor="middle" font-size="9" font-weight="700" fill="#042C53">③ レビュー（第2の係）</text>
+<text x="480" y="376" text-anchor="middle" font-size="7" fill="#0C447C">別のエージェントが点検し</text>
+<text x="480" y="390" text-anchor="middle" font-size="7" fill="#0C447C">人に知らせる</text>
+
+<rect x="30" y="178" width="240" height="74" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="1.5"/>
+<text x="150" y="210" text-anchor="middle" font-size="10" font-weight="700" fill="#2C2C2A">あなた（人間）</text>
+<text x="150" y="230" text-anchor="middle" font-size="7" fill="#2C2C2A">「採用するか」だけ決める</text>
+
+<path d="M600,72 Q740,90 810,174" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#lp)"/>
+<path d="M810,252 Q740,340 604,363" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#lp)"/>
+<text x="720" y="320" text-anchor="middle" font-size="7" fill="#185FA5">止めるまで繰り返す</text>
+<path d="M360,363 Q220,340 150,256" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#lp)"/>
+<text x="240" y="320" text-anchor="middle" font-size="7" fill="#5F5E5A">要判断のものだけ通知</text>
+<path d="M150,178 Q220,90 356,68" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#lp)"/>
+</svg>
+
+</div>
+
+<div class="text-xs opacity-50 mt-1">参考: Anthropic「Getting started with loops」（proactive loop）／ Addy Osmani「Loop Engineering」</div>
+
+<!--
+発表者ノート:
+- 4-6の部品（トリガー=フック、メイン/レビュー=サブエージェント、完了指標=goal）が、組み合わさるとこう回る、という統合図
+- 人間は輪の外にいて「採用するか」だけ決める＝HOTL（4-3）の具体像
+- 全自動に見えるが、レビュー係と完了指標があるから任せられる、と強調
+-->
+
+---
+
+# 4-8. システム構築の基礎（一枚絵）
 
 <div class="text-sm opacity-70 mb-2">開発の進め方には大きく2つの型がある（詳細用語は覚えなくてOK）</div>
 
@@ -1479,7 +1551,7 @@ AIが速く回せるほど、1つずつ承認する人間が追いつかなく�
 
 ---
 
-# 4-8. 実例：ビジネスアイデアをAIと一緒に構造化する
+# 4-9. 実例：ビジネスアイデアをAIと一緒に構造化する
 
 早崎さん自身が新規事業を検討した際、Claudeと対話しながら思考を進めた実例
 
@@ -1495,7 +1567,7 @@ https://www.guide-series.com/products/guide01/
 
 ---
 
-# 4-9. 検討の変遷
+# 4-10. 検討の変遷
 
 1. 最初のアイデアを思いつく
 2. AIが前提を事実確認する（すでに世の中にある技術と重複していないか）
@@ -1505,7 +1577,7 @@ https://www.guide-series.com/products/guide01/
 
 ---
 
-# 4-10. 対話の中の役割分担
+# 4-11. 対話の中の役割分担
 
 | 役割 | 内容 |
 |---|---|
@@ -1520,7 +1592,7 @@ https://www.guide-series.com/products/guide01/
 
 ---
 
-# 4-11. ここから見える「実装への一歩」
+# 4-12. ここから見える「実装への一歩」
 
 このプロセスを実際に動くしくみにするなら、次のように設計を進める
 
@@ -1535,7 +1607,7 @@ https://www.guide-series.com/products/guide01/
 
 ---
 
-# 4-12. 「あなたは今どこにいるか」自己診断
+# 4-13. 「あなたは今どこにいるか」自己診断
 
 <div class="text-sm opacity-70 mb-3">当てはまる一番上のレベルが、いまのあなたの立ち位置</div>
 
@@ -1557,7 +1629,7 @@ https://www.guide-series.com/products/guide01/
 
 ---
 
-# 4-13. アイデアソン参加者の到達目標レベル
+# 4-14. アイデアソン参加者の到達目標レベル
 
 <v-click>
 
@@ -1569,6 +1641,27 @@ https://www.guide-series.com/products/guide01/
 
 # 第5章
 ## AIと向き合う心構えと実装の注意点
+
+---
+layout: center
+class: text-center
+---
+
+<!-- 第5章の入り。共感を呼ぶワンスライド -->
+
+# **AIは便利。<br>でも、信じすぎるのも<br>ちょっと怖い。**
+
+<div v-click class="mt-10 text-xl">
+
+——そう感じている方も、<br>いらっしゃるのではないでしょうか。
+
+</div>
+
+<!--
+発表者ノート:
+- ここは説明ではなく共感。聴衆の本音（便利だけど不安）を代弁して、5章の注意点パートに自然に入る
+- 賛同を得てから「その不安は正しい。だから心構えが要る」と続ける
+-->
 
 ---
 
@@ -1712,26 +1805,7 @@ AIへの<strong>入力から曖昧さを消す</strong>。指示を具体的に�
 
 ---
 
-# 5-6. 専門性が議論の質を変えた瞬間
-
-先ほど（4-8〜4-10）で紹介した実例でも、同じことが起きていた
-
-<v-click>
-
-自分の専門知識（現場知見）を対話に投入した瞬間、AIの提案の質が変わり、
-事業の方向性そのものが変わった
-
-</v-click>
-
-<v-click>
-
-**AIは論点を整理できる。しかし「これが正しい」と判断できるのは、自分の現場知識だけ**
-
-</v-click>
-
----
-
-# 5-7. AIに頼る前に揃えるべきもの
+# 5-6. AIに頼る前に揃えるべきもの
 
 - 定量的なデータの蓄積（来館者数・売上・稼働率など）
 - 業務プロセスの言語化・標準化
@@ -1739,7 +1813,7 @@ AIへの<strong>入力から曖昧さを消す</strong>。指示を具体的に�
 
 ---
 
-# 5-8. PoC実装のバッドプラクティス
+# 5-7. PoC実装のバッドプラクティス
 
 - **作って終わり**：使う人を想定せずに作ったシステムは使われない
 - **ユーザー視点の欠如**：技術が優れていても現場に馴染まなければ意味がない
@@ -1763,7 +1837,46 @@ layout: section
 
 ---
 
-# 6-1. 明日からできること① ── AIへの指示を具体的にする
+# 6-1. 前提：これは「業務改善」であり、指標が要る
+
+<div class="text-base leading-relaxed mt-2">
+
+<div v-click>
+
+今回やることは、AIを使った<strong>業務改善の一環</strong>。<br>
+改善である以上、<strong>「何がどう良くなったか」を測る指標</strong>を持つことが肝心。
+
+</div>
+
+</div>
+
+<div v-click class="mt-5">
+
+<div class="text-sm opacity-70 mb-2">測定指標は、対象業務によって大きく2つに分かれる</div>
+
+| 対象 | 主な測定指標 |
+|---|---|
+| **既存業務の改善** | 工数削減率・コスト削減額・処理速度の向上 |
+| **新規業務の立ち上げ** | 学習データの蓄積量・知見のドキュメント化・現場採用率 |
+
+</div>
+
+<div v-click class="mt-4 text-sm">
+
+新規業務では即時のROIを求めない。<strong>蓄積されること自体が成果</strong>。<br>
+ただし「蓄積されているが使われていない」は成功ではない。
+
+</div>
+
+<!--
+発表者ノート:
+- 冒頭から移設。いきなり判断軸ではなく「業務改善だから指標が要る」という文脈を与えてから2分類を出す
+- この指標の話が、次の6-2（具体的言語化）と6-7ワークシートの「完了指標」に直結する
+-->
+
+---
+
+# 6-2. 明日からできること① ── AIへの指示を具体的にする
 
 <div class="text-sm opacity-70 mb-4">曖昧な言葉を、数字・期日・対象まで落とす。これだけで成果が変わる</div>
 
@@ -1785,7 +1898,7 @@ layout: section
 
 ---
 
-# 6-2. 明日からできること② ── チャットを"卒業"する
+# 6-3. 明日からできること② ── チャットを"卒業"する
 
 <div class="text-base leading-relaxed mt-2">
 
@@ -1827,7 +1940,7 @@ layout: default
 class: bg-white
 ---
 
-# 6-3. 最初から完璧を目指さない
+# 6-4. 最初から完璧を目指さない
 
 <div class="text-lg leading-relaxed mt-6">
 
@@ -1863,9 +1976,9 @@ class: bg-white
 
 ---
 
-# 6-4. ループ設計ワークシート
+# 6-5. ループ設計ワークシート
 
-<div class="text-sm opacity-70 mb-3">自分のビジネスにAIを組み込むなら、という視点で4つを埋めていく（4-11で見た型と同じ）</div>
+<div class="text-sm opacity-70 mb-3">自分のビジネスにAIを組み込むなら、という視点で4つを埋めていく（4-12で見た型と同じ）</div>
 
 | 項目 | 問い |
 |---|---|
@@ -1878,7 +1991,7 @@ class: bg-white
 
 ---
 
-# 6-5. ワークセッション ── 業務を「ループ」にできるか
+# 6-6. ワークセッション ── 業務を「ループ」にできるか
 
 <div class="text-base leading-relaxed mt-2">
 
@@ -1909,6 +2022,100 @@ class: bg-white
 </div>
 
 <div v-click class="text-xs opacity-60 mt-5">正解を出す場ではありません。半年間のアイデアソンで深めるための「最初の問い」を作る場です</div>
+
+---
+
+# 6-7. ワークシート（この図に書き込みます）
+
+<div class="text-sm opacity-70 mb-1">A3で印刷し、グループで空欄を埋めながら「業務のループ」を設計してみましょう</div>
+
+<!-- 印刷用ループ設計ワークシート。空欄の吹き出しに手書きで書き込む前提。角丸なし、横長w-full -->
+
+<div class="flex justify-center w-full">
+
+<svg viewBox="0 0 860 420" xmlns="http://www.w3.org/2000/svg" role="img" class="w-full" style="max-height: 360px;" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Noto Sans JP',sans-serif">
+<title>書き込み式ループ設計ワークシート</title>
+<desc>トリガー・エージェントの作業・完了指標・人間の判断の4つの空欄に書き込み、循環として設計するワークシート</desc>
+
+<defs>
+<marker id="ws" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+<path d="M0,0 L10,5 L0,10 z" fill="#5F5E5A"/>
+</marker>
+</defs>
+
+<text x="230" y="40" font-size="9" font-weight="700" fill="#993C1D">① いつ始める？（トリガー）</text>
+<rect x="230" y="52" width="330" height="60" fill="transparent" stroke="#993C1D" stroke-width="1.5"/>
+
+<text x="600" y="175" font-size="9" font-weight="700" fill="#042C53">② AIに何をさせる？</text>
+<rect x="600" y="187" width="240" height="60" fill="transparent" stroke="#185FA5" stroke-width="1.5"/>
+
+<text x="230" y="330" font-size="9" font-weight="700" fill="#993C1D">③ 何が揃えば「完了」？（完了指標）</text>
+<rect x="230" y="342" width="330" height="60" fill="transparent" stroke="#993C1D" stroke-width="1.5"/>
+
+<text x="20" y="175" font-size="9" font-weight="700" fill="#2C2C2A">④ 人間が判断すること</text>
+<rect x="20" y="187" width="240" height="60" fill="transparent" stroke="#5F5E5A" stroke-width="1.5"/>
+
+<path d="M560,95 Q660,120 720,184" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#ws)"/>
+<path d="M720,247 Q660,320 562,345" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#ws)"/>
+<path d="M230,352 Q120,330 140,250" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#ws)"/>
+<path d="M140,187 Q160,120 228,86" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#ws)"/>
+</svg>
+
+</div>
+
+<div class="text-xs opacity-50 mt-1">4つの空欄が埋まり、矢印でひと回りすれば、それがあなたの業務の「ループ設計」の第一歩です</div>
+
+<!--
+発表者ノート:
+- 当日はこの図をA3で配布。グループで空欄に手書きしてもらう
+- 4つの枠は 4-6の部品・4-7のループ図・6-1の完了指標に対応。埋めれば擬似ループになる
+- 完璧でなくてよい（6-3の失敗前提）。まず一周させることが目的
+-->
+
+---
+layout: default
+class: bg-white
+---
+
+# 最後に ── これから磨きたい3つのスキル
+
+<div class="text-base leading-relaxed mt-4">
+
+<div v-click>
+
+**1. 問題を整理・分解する力（ビジネススキル）**
+課題を分け、解決までの道筋を自分の中で描ける。<span class="text-xs opacity-60">← 今日のワークセッション</span>
+
+</div>
+
+<div v-click class="mt-5">
+
+**2. AIを使いこなす力**
+次々出てくるAIやツールを、仕組みごと理解して選び・使える。<span class="text-xs opacity-60">← 5段階レベル（第3章）</span>
+
+</div>
+
+<div v-click class="mt-5">
+
+**3. AIを"束ねる"力（ループを設計する力）**
+複数のAIを並列で動かし、どこに人間を置くかを設計する。<span class="text-xs opacity-60">← Loop / Harness（第4章）</span>
+
+</div>
+
+</div>
+
+<div v-click class="text-center mt-6 text-lg">
+
+どれも、<strong>今日が出発点</strong>です
+
+</div>
+
+<!--
+発表者ノート:
+- 3つのスキルが、それぞれ本セミナーの章に対応している（ワーク／第3章／第4章）
+- 3つ目は「量」ではなく「設計・オーケストレーション」。第4章のループ設計の回収
+- この後の締め（問いはいくつ増えた）へつなぐ
+-->
 
 ---
 layout: center
