@@ -1431,7 +1431,7 @@ AIが速く回せるほど、1つずつ承認する人間が追いつかなく�
 
 <div class="flex justify-center w-full">
 
-<svg viewBox="0 0 960 430" xmlns="http://www.w3.org/2000/svg" role="img" class="w-full" style="max-height: 360px;" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Noto Sans JP',sans-serif">
+<svg viewBox="0 0 960 380" xmlns="http://www.w3.org/2000/svg" role="img" class="w-full" style="max-height: 320px;" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Noto Sans JP',sans-serif">
 <title>プロアクティブループの循環図</title>
 <desc>トリガーで起動し、メインエージェントが作成、第2のエージェントがレビュー、人間は採用可否を決める、という循環を示す図</desc>
 
@@ -1441,31 +1441,35 @@ AIが速く回せるほど、1つずつ承認する人間が追いつかなく�
 </marker>
 </defs>
 
-<rect x="360" y="30" width="240" height="74" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="1.5"/>
-<text x="480" y="60" text-anchor="middle" font-size="9" font-weight="700" fill="#993C1D">① トリガー</text>
-<text x="480" y="80" text-anchor="middle" font-size="7" fill="#2C2C2A">決めた時刻に自動で起動</text>
-<text x="480" y="94" text-anchor="middle" font-size="7" fill="#2C2C2A">（例：毎朝チャットを確認）</text>
+<rect x="20" y="150" width="210" height="86" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="1.5"/>
+<text x="125" y="182" text-anchor="middle" style="font-size:15px" font-weight="700" fill="#993C1D">① トリガー</text>
+<text x="125" y="204" text-anchor="middle" style="font-size:11px" fill="#2C2C2A">決めた時刻に</text>
+<text x="125" y="220" text-anchor="middle" style="font-size:11px" fill="#2C2C2A">自動で起動</text>
 
-<rect x="690" y="178" width="240" height="74" fill="#D85A30" stroke="#993C1D" stroke-width="1.5"/>
-<text x="810" y="208" text-anchor="middle" font-size="9" font-weight="700" fill="#FFFFFF">② メインエージェント</text>
-<text x="810" y="228" text-anchor="middle" font-size="7" fill="#FCE3D8">完了指標を満たすまで</text>
-<text x="810" y="242" text-anchor="middle" font-size="7" fill="#FCE3D8">作業を繰り返す</text>
+<rect x="270" y="150" width="210" height="86" fill="#D85A30" stroke="#993C1D" stroke-width="1.5"/>
+<text x="375" y="182" text-anchor="middle" style="font-size:14px" font-weight="700" fill="#FFFFFF">② メインエージェント</text>
+<text x="375" y="204" text-anchor="middle" style="font-size:11px" fill="#FCE3D8">完了指標を満たすまで</text>
+<text x="375" y="220" text-anchor="middle" style="font-size:11px" fill="#FCE3D8">作業を繰り返す</text>
 
-<rect x="360" y="326" width="240" height="74" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/>
-<text x="480" y="356" text-anchor="middle" font-size="9" font-weight="700" fill="#042C53">③ レビュー（第2の係）</text>
-<text x="480" y="376" text-anchor="middle" font-size="7" fill="#0C447C">別のエージェントが点検し</text>
-<text x="480" y="390" text-anchor="middle" font-size="7" fill="#0C447C">人に知らせる</text>
+<rect x="520" y="150" width="210" height="86" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/>
+<text x="625" y="182" text-anchor="middle" style="font-size:15px" font-weight="700" fill="#042C53">③ レビュー</text>
+<text x="625" y="204" text-anchor="middle" style="font-size:11px" fill="#0C447C">別のエージェントが点検し</text>
+<text x="625" y="220" text-anchor="middle" style="font-size:11px" fill="#0C447C">人に知らせる</text>
 
-<rect x="30" y="178" width="240" height="74" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="1.5"/>
-<text x="150" y="210" text-anchor="middle" font-size="10" font-weight="700" fill="#2C2C2A">あなた（人間）</text>
-<text x="150" y="230" text-anchor="middle" font-size="7" fill="#2C2C2A">「採用するか」だけ決める</text>
+<rect x="770" y="150" width="170" height="86" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="1.5"/>
+<text x="855" y="182" text-anchor="middle" style="font-size:15px" font-weight="700" fill="#2C2C2A">あなた（人間）</text>
+<text x="855" y="204" text-anchor="middle" style="font-size:11px" fill="#2C2C2A">「採用するか」を</text>
+<text x="855" y="220" text-anchor="middle" style="font-size:11px" fill="#2C2C2A">決める</text>
 
-<path d="M600,72 Q740,90 810,174" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#lp)"/>
-<path d="M810,252 Q740,340 604,363" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#lp)"/>
-<text x="720" y="320" text-anchor="middle" font-size="7" fill="#185FA5">止めるまで繰り返す</text>
-<path d="M360,363 Q220,340 150,256" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#lp)"/>
-<text x="240" y="320" text-anchor="middle" font-size="7" fill="#5F5E5A">要判断のものだけ通知</text>
-<path d="M150,178 Q220,90 356,68" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#lp)"/>
+<path d="M230,193 L268,193" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#lp)"/>
+<path d="M480,193 L518,193" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#lp)"/>
+<path d="M730,193 L768,193" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#lp)"/>
+
+<path d="M375,236 L375,320 L125,320 L125,238" fill="none" stroke="#185FA5" stroke-width="1.5" marker-end="url(#lp)"/>
+<text x="250" y="338" text-anchor="middle" style="font-size:11px" fill="#185FA5">完了するまで、この区間を繰り返す</text>
+
+<path d="M855,150 L855,60 L125,60 L125,148" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#lp)"/>
+<text x="490" y="50" text-anchor="middle" style="font-size:11px" fill="#5F5E5A">要判断のものだけ人へ。あとは自動で次のループへ</text>
 </svg>
 
 </div>
@@ -1499,40 +1503,40 @@ AIが速く回せるほど、1つずつ承認する人間が追いつかなく�
 </marker>
 </defs>
 
-<text x="30" y="30" font-size="9" font-weight="700" fill="#2C2C2A">ウォーターフォール：一方向に順番に進む</text>
+<text x="30" y="28" style="font-size:15px" font-weight="700" fill="#2C2C2A">ウォーターフォール：一方向に順番に進む</text>
 
-<rect x="30" y="48" width="110" height="40" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/>
-<text x="85" y="72" text-anchor="middle" font-size="8" fill="#0C447C">企画</text>
-<rect x="170" y="48" width="110" height="40" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/>
-<text x="225" y="72" text-anchor="middle" font-size="8" fill="#0C447C">設計</text>
-<rect x="310" y="48" width="110" height="40" fill="#D85A30" stroke="#993C1D" stroke-width="1.5"/>
-<text x="365" y="72" text-anchor="middle" font-size="8" fill="#FFFFFF">開発</text>
-<rect x="450" y="48" width="110" height="40" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/>
-<text x="505" y="72" text-anchor="middle" font-size="8" fill="#0C447C">テスト</text>
-<rect x="590" y="48" width="110" height="40" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/>
-<text x="645" y="72" text-anchor="middle" font-size="8" fill="#0C447C">リリース</text>
-<rect x="730" y="48" width="110" height="40" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/>
-<text x="785" y="72" text-anchor="middle" font-size="8" fill="#0C447C">運用</text>
-<path d="M140,68 L170,68" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#wf)"/>
-<path d="M280,68 L310,68" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#wf)"/>
-<path d="M420,68 L450,68" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#wf)"/>
-<path d="M560,68 L590,68" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#wf)"/>
-<path d="M700,68 L730,68" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#wf)"/>
+<rect x="30" y="46" width="118" height="46" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/>
+<text x="89" y="75" text-anchor="middle" style="font-size:13px" fill="#0C447C">企画</text>
+<rect x="178" y="46" width="118" height="46" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/>
+<text x="237" y="75" text-anchor="middle" style="font-size:13px" fill="#0C447C">設計</text>
+<rect x="326" y="46" width="118" height="46" fill="#D85A30" stroke="#993C1D" stroke-width="1.5"/>
+<text x="385" y="75" text-anchor="middle" style="font-size:13px" fill="#FFFFFF">開発</text>
+<rect x="474" y="46" width="118" height="46" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/>
+<text x="533" y="75" text-anchor="middle" style="font-size:13px" fill="#0C447C">テスト</text>
+<rect x="622" y="46" width="118" height="46" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/>
+<text x="681" y="75" text-anchor="middle" style="font-size:13px" fill="#0C447C">リリース</text>
+<rect x="770" y="46" width="118" height="46" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/>
+<text x="829" y="75" text-anchor="middle" style="font-size:13px" fill="#0C447C">運用</text>
+<path d="M148,69 L176,69" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#wf)"/>
+<path d="M296,69 L324,69" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#wf)"/>
+<path d="M444,69 L472,69" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#wf)"/>
+<path d="M592,69 L620,69" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#wf)"/>
+<path d="M740,69 L768,69" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#wf)"/>
 
-<line x1="30" y1="120" x2="870" y2="120" stroke="#D3D1C7" stroke-width="1"/>
+<line x1="30" y1="120" x2="888" y2="120" stroke="#D3D1C7" stroke-width="1"/>
 
-<text x="30" y="152" font-size="9" font-weight="700" fill="#2C2C2A">アジャイル：短く作って試すを繰り返す</text>
+<text x="30" y="150" style="font-size:15px" font-weight="700" fill="#2C2C2A">アジャイル：短く作って試すを繰り返す</text>
 
-<rect x="290" y="180" width="110" height="40" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/>
-<text x="345" y="204" text-anchor="middle" font-size="8" fill="#0C447C">設計</text>
-<rect x="430" y="180" width="110" height="40" fill="#D85A30" stroke="#993C1D" stroke-width="1.5"/>
-<text x="485" y="204" text-anchor="middle" font-size="8" fill="#FFFFFF">開発</text>
-<rect x="570" y="180" width="110" height="40" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/>
-<text x="625" y="204" text-anchor="middle" font-size="8" fill="#0C447C">テスト</text>
-<path d="M400,200 L430,200" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#wf)"/>
-<path d="M540,200 L570,200" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#wf)"/>
-<path d="M625,220 Q625,265 485,265 Q345,265 345,222" fill="none" stroke="#185FA5" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#wf)"/>
-<text x="485" y="280" text-anchor="middle" font-size="8" fill="#185FA5">短いサイクルで繰り返す</text>
+<rect x="300" y="172" width="118" height="46" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/>
+<text x="359" y="201" text-anchor="middle" style="font-size:13px" fill="#0C447C">設計</text>
+<rect x="448" y="172" width="118" height="46" fill="#D85A30" stroke="#993C1D" stroke-width="1.5"/>
+<text x="507" y="201" text-anchor="middle" style="font-size:13px" fill="#FFFFFF">開発</text>
+<rect x="596" y="172" width="118" height="46" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/>
+<text x="655" y="201" text-anchor="middle" style="font-size:13px" fill="#0C447C">テスト</text>
+<path d="M418,195 L446,195" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#wf)"/>
+<path d="M566,195 L594,195" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#wf)"/>
+<path d="M655,218 Q655,258 507,258 Q359,258 359,220" fill="none" stroke="#185FA5" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#wf)"/>
+<text x="507" y="278" text-anchor="middle" style="font-size:12px" fill="#185FA5">短いサイクルで繰り返す</text>
 </svg>
 
 </div>
