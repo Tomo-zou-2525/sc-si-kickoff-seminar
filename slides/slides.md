@@ -96,54 +96,27 @@ SC業界特有の課題にAIを当てはめる思考を身につける
 
 ---
 
-# アイディアソンの全体像
 
-<div class="grid grid-cols-2 gap-6 mt-4">
-
-<div>
-
-**フェーズ1**
-AI×SC業界の情報収集
-
-<div class="text-sm opacity-70 mt-1">成果物：SC業界でのAI活用事例をまとめる（アプリ制作は不要）</div>
-
-</div>
-
-<div>
-
-**フェーズ2**
-自身のビジネスモデルへの組み込み
-
-<div class="text-sm opacity-70 mt-1">成果物：AIをどう組み込むかの仮想的な設計アウトプット（実装は不要）</div>
-
-</div>
-
-</div>
-
-<div class="text-xs opacity-50 mt-4">実施期間：2026年10月〜2027年3月末／成果発表会：2027年3月（予定）</div>
-
-<!--
-アイデアソンは約半年間のプログラム。
-フェーズ1は情報収集・アウトプットが成果物（アプリ制作は不要）。
-フェーズ2は自身のビジネスモデルへのAI組み込みを、仮想的な設計レベルでアウトプットする（実装は不要）。
-今日のキックオフは、このプログラム全体の出発点であることを伝える。
--->
-
----
-
-# 今日のゴール
+# 本日の達成目標
+<br>
+<br>
+<br>
+<br>
+<div class="text-center center">
 
 <v-click>
 
-**AIに関する質問が増えること**
+<h1>AIに関する質問が増えること</h1>
 
 </v-click>
 
 <v-click>
 
-<h1>→ 答えを持ち帰ることより、**問いを持ち帰ること**を重視する</h1>
+<h2>→ 答えを持ち帰ることより、問いを持ち帰ることを重視する</h2>
 
 </v-click>
+
+</div>
 
 <!--
 今日は答えを覚えて持ち帰る場ではない。
@@ -151,14 +124,13 @@ AI×SC業界の情報収集
 帰ってもらうことがゴール。その問いを、これから半年間のアイデアソン期間で深めていく。
 -->
 
----
 
 ---
 layout: section
 ---
 
 # 第1章
-## AIとは何か――定義と歴史
+## AIとは何か_定義と歴史
 
 ---
 layout: default
@@ -534,7 +506,6 @@ class: bg-white
 <h3>3. AIの研究は約70年前に始まり、ブームと冬の時代を繰り返しながら、いまや各方面へ発展している。</h3>
 
 </div>
-
 </div>
 
 <!--
@@ -558,7 +529,7 @@ layout: default
 class: bg-white
 ---
 
-# 正直、僕もまだ答えを持っていない
+# 私もまだ答えを持っていない
 
 <div class="mt-4">
 
@@ -644,7 +615,7 @@ layout: section
 <iframe src="https://bbycroft.net/llm" class="w-full h-100 border-0" />
 
 ---
-layout: default
+layout: center
 class: bg-white
 ---
 
@@ -879,7 +850,7 @@ class: bg-white
 
 <div v-click class="mt-8 text-center text-xl">
 
-この「<strong>？</strong>」が、後半の主役です
+<h1>この「<strong>？</strong>」が、後半の主役です</h1>
 
 </div>
 
@@ -940,6 +911,8 @@ class: text-center
 - レベルが上＝偉い、ではない点は後のスライドで補足（手法の違いであって優劣ではない）
 -->
 
+---
+layout: center
 ---
 
 # その前に：「エージェント」とは？
