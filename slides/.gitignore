@@ -1,0 +1,12 @@
+# 依存関係（再インストール可能・容量が大きい）
+node_modules/
+
+# Slidev のビルド生成物
+dist/
+.slidev/
+
+# 書き出したエクスポート（PDF等の生成物）
+*.pdf
+
+# OS が生成するゴミ
+.DS_Store

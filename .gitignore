@@ -1,0 +1,27 @@
+# === 依存・生成物 ===
+node_modules/
+slides/node_modules/
+dist/
+.slidev/
+*.pdf
+
+# === OS が生成するゴミ ===
+.DS_Store
+
+# === 公開しない制作用フォルダ・メモ ===
+memo/
+old/
+data/
+demo/
+
+# === ルート直下の作業メモ（公開しない）===
+*.ini
+セミナー目次案.md
+講師用カンニングペーパー.md
+
+# === slides 配下の作業メモ（公開しない）===
+slides/restructure_mind.md
+slides/改定案.md
+slides/*.ini
+slides/template-samples.md
+slides/template-samples-slidev.md
