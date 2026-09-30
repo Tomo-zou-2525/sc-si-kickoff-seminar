@@ -540,13 +540,6 @@ layout: section
 ## ここで機械学習を用いたデモアプリをご紹介します。
 
 ---
-layout: section
----
-
-内部向け：デモ実演中：このスライドは後で削除いたします。
-
-
----
 layout: default
 class: bg-white
 ---
@@ -947,12 +940,6 @@ layout: section
 <br>
 
 ### エージェントのデモをご覧ください。
-
----
-layout: section
----
-
-内部向け：デモ実演中：このスライドは後で削除いたします。
 
 ---
 layout: default
