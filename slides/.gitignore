@@ -4,6 +4,7 @@ node_modules/
 # Slidev のビルド生成物
 dist/
 .slidev/
+_out_final/
 
 # 書き出したエクスポート（PDF等の生成物）
 *.pdf

@@ -988,7 +988,7 @@ flowchart TD
 
 <div>
 
-## L1：チャット・プロンプト
+## L1：チャット
 
 <div class="text-sm mt-3 leading-relaxed">
 
@@ -998,7 +998,11 @@ flowchart TD
 
 </div>
 
-<div class="text-xs opacity-60 mt-4">まずはここから。誰でも今日から始められる入口です</div>
+<div class="text-sm mt-4 pl-3" style="border-left:3px solid #993C1D">
+<strong>見分け方</strong>：毎回その場で質問して、返ってきた答えを人が使う。手順やデータの設定はしていない。
+</div>
+
+<div class="text-xs opacity-60 mt-3">まずはここから。誰でも今日から始められる入口です</div>
 
 </div>
 
@@ -1038,7 +1042,11 @@ flowchart TD
 
 </div>
 
-<div class="text-xs opacity-60 mt-4">「毎回同じ質の答え」を引き出せるようにする段階です</div>
+<div class="text-sm mt-4 pl-3" style="border-left:3px solid #993C1D">
+<strong>見分け方</strong>：あらかじめ指示文や資料を仕込んで、毎回同じ品質で答えさせている。でも実行するのは人。
+</div>
+
+<div class="text-xs opacity-60 mt-3">「毎回同じ質の答え」を引き出せるようにする段階です</div>
 
 </div>
 
@@ -1078,7 +1086,11 @@ flowchart TD
 
 </div>
 
-<div class="text-xs opacity-60 mt-4">「相談相手」から「作業してくれる相手」へ変わる段階です</div>
+<div class="text-sm mt-4 pl-3" style="border-left:3px solid #993C1D">
+<strong>見分け方</strong>：AIが外部のツールやデータを操作し、複数の手順を自分でつないで最後までやり切る。
+</div>
+
+<div class="text-xs opacity-60 mt-3">「相談相手」から「作業してくれる相手」へ変わる段階です</div>
 
 </div>
 
@@ -1118,7 +1130,11 @@ flowchart TD
 
 </div>
 
-<div class="text-xs opacity-60 mt-4">1体では手に負えない、複数部門をまたぐ業務の段階です</div>
+<div class="text-sm mt-4 pl-3" style="border-left:3px solid #993C1D">
+<strong>見分け方</strong>：役割の違うAIが複数動き、互いの結果を渡し合う。1体の作業自動化には収まらない。
+</div>
+
+<div class="text-xs opacity-60 mt-3">1体では手に負えない、複数部門をまたぐ業務の段階です</div>
 
 </div>
 
@@ -1158,7 +1174,11 @@ flowchart TD
 
 </div>
 
-<div class="text-xs opacity-60 mt-4">前半で「？」にしたHarnessは、ここです。後半で詳しく扱います</div>
+<div class="text-sm mt-4 pl-3" style="border-left:3px solid #993C1D">
+<strong>見分け方</strong>：人が毎回起動しなくても、仕組みが回り続けて勝手に改善していく。単体のツールというより「基盤」。
+</div>
+
+<div class="text-xs opacity-60 mt-3">前半で「？」にしたHarnessは、ここです。後半で詳しく扱います</div>
 
 </div>
 
@@ -1221,6 +1241,8 @@ class: bg-white
 
 # はじめに：ここから先は「発展的な話」です
 
+
+<br>
 <div class="bordered-box mt-6">
 
 これから話す<strong>ループ / ハーネスエンジニアリング</strong>は、まだ一般に確立された理論ではありません。
@@ -1233,6 +1255,7 @@ class: bg-white
 
 そして、ループは<strong>諸刃の剣</strong>です。<br>
 深く理解して使えば加速し、考えずに使えば品質は落ちます。道具は違いを知りません。<strong>決めるのは、使う私たちです。</strong>
+
 
 </div>
 
@@ -1249,40 +1272,52 @@ class: bg-white
 
 ---
 
-# 4-1. 【深掘り】使い方の進化：Prompt → Context → Harness → Loop
+
+# 4-1. 使い方の進化：<br>Prompt → Context → Harness → Loop
 
 | 用語 | 定義 | 補足 |
 |---|---|---|
-| プロンプト | 人間がAIに渡すテキストを作成する | |
-| コンテキスト | 人間がAIに見せる情報を選択する | |
-| ハーネス | AIが安全に動くための環境・足場（ツール・メモリ・権限・検証の仕組み）を人間が用意する | 「制約を課す」だけでなく「能力を与える」側面もある |
-| ループ | investigate→implement→verify→repeatの反復サイクルを設計し、人間の関与ポイントを決める | |
+| Prompt | 人間がAIに渡すテキストを作成する | |
+| Context | 人間がAIに見せる情報を選択する | |
+| Harenss | AIが安全に動くための環境・足場（ツール・メモリ・権限・検証の仕組み）を人間が用意する | 「制約を課す」だけでなく「能力を与える」側面もある |
+| loop | 調査→実施→検証→繰り返しの反復サイクルを設計し、人間の関与ポイントを決める | |
 
 <div class="text-xs opacity-50 mt-6">出典: Addy Osmani "Own the Outer Loop"（2026/7）</div>
 
-<v-click>
+---
+layout: section
+---
 
 <div class="bordered-box mt-6">
 
-**Q. ちょっと待って、なんでそこまで「ループ」にこだわるの？**
+<v-click>
 
-**A. 将来、人間の手作業がボトルネックになるからです。**
-AIが速く回せるほど、1つずつ承認する人間が追いつかなくなります。だからこそ「回り続ける仕組み」を先に設計しておきます。
-
-</div>
+## Q. ちょっと待って、なんでそこまで「ループ」にこだわるの？
 
 </v-click>
 
+<br>
+
+<v-click>
+
+## **A. 将来、人間の手作業がボトルネックになるからです。**
+AIが速く生産するほど、1つずつ承認する人間が追いつかなくなります。<br>だからこそ「回り続ける仕組み」を先に設計しておきます。
+
+</v-click>
+
+</div>
+
+
 ---
 
-# 4-2. なぜ「ループ」へ向かうのか（転換点）
+# 4-2. なぜ「ループ」へ向かうのか
 
 <div class="text-base leading-relaxed mt-4">
 
 <br>
 <div v-click>
 
-<h3>これまで：人間がAIに指示 → 確認 → また指示。<strong>1手ずつのキャッチボールです。</strong></h3>
+<h3>これまで：人間がAIに指示 → 確認 → また指示。<br><strong>1手ずつのキャッチボールです。</strong></h3>
 
 </div>
 <br>
@@ -1338,13 +1373,57 @@ AIが速く回せるほど、1つずつ承認する人間が追いつかなく�
 
 # 4-4. ループの3層構造
 
-| 層 | 名称 | サイクル | 内容 |
-|---|---|---|---|
-| 第一 | エージェント型コーディングループ | n分〜1時間 | AIが実装〜自己テストを反復。人間は基本不在 |
-| 第二 | 開発者フィードバックループ | n時間単位 | 人間が成果物を見て方向づけ。人間の判断が最も効く層 |
-| 第三 | 外部フィードバックループ | n日〜週単位 | ユーザー・テスター等の外部評価が仕様に反映される |
+<div class="text-sm opacity-70 mb-2">速いループが内側で回り、その外側を人間が、さらに外側を外部評価が包む ── 入れ子の3層です</div>
 
-<div class="text-xs opacity-50 mt-6">出典: Andrew Ng "3 Loops for 0-to-1 AI Products"（Osmaniとは別出典）</div>
+<div class="flex justify-center w-full">
+
+<svg viewBox="0 0 900 470" xmlns="http://www.w3.org/2000/svg" role="img" class="w-full" style="max-height: 400px;" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Noto Sans JP',sans-serif">
+<title>ループの3層構造（入れ子）</title>
+<desc>内側の速いコーディングループを、開発者のフィードバックループが囲み、さらに外部フィードバックループが囲む入れ子構造。外へいくほどサイクルが長くなる</desc>
+
+<!-- 第三層（外側・外部フィードバック） -->
+<rect x="30" y="30" width="700" height="410" fill="#F4F7FB" stroke="#185FA5" stroke-width="1.5"/>
+<text x="50" y="58" style="font-size:15px" font-weight="700" fill="#042C53">第三層 ── 外部フィードバックループ</text>
+<text x="50" y="80" style="font-size:12px" fill="#0C447C">ユーザー・テスター等の外部評価が仕様に反映される</text>
+
+<!-- 第二層（中間・開発者フィードバック） -->
+<rect x="70" y="100" width="620" height="300" fill="#FBEFE9" stroke="#993C1D" stroke-width="1.5"/>
+<text x="90" y="128" style="font-size:15px" font-weight="700" fill="#993C1D">第二層 ── 開発者フィードバックループ</text>
+<text x="90" y="150" style="font-size:12px" fill="#7A3117">人間が成果物を見て方向づけ。人間の判断が最も効く層</text>
+
+<!-- 第一層（内側・エージェント） -->
+<rect x="110" y="170" width="540" height="200" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="1.5"/>
+<text x="130" y="200" style="font-size:15px" font-weight="700" fill="#2C2C2A">第一層 ── エージェント型コーディングループ</text>
+<text x="130" y="224" style="font-size:12px" fill="#4A4945">AIが実装〜自己テストを反復。人間は基本不在</text>
+
+<!-- 内側の反復矢印 -->
+<g>
+<path d="M300,300 A70,55 0 1 1 440,300" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#l3)"/>
+<text x="370" y="352" text-anchor="middle" style="font-size:12px" fill="#5F5E5A">実装 → 自己テスト を高速で反復</text>
+</g>
+
+<defs>
+<marker id="l3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+<path d="M0,0 L10,5 L0,10 z" fill="#5F5E5A"/>
+</marker>
+<marker id="l3b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+<path d="M0,0 L10,5 L0,10 z" fill="#185FA5"/>
+</marker>
+</defs>
+
+<!-- サイクル時間の軸（右側） -->
+<text x="820" y="55" text-anchor="middle" style="font-size:12px" font-weight="700" fill="#185FA5">サイクル</text>
+<line x1="820" y1="75" x2="820" y2="415" stroke="#185FA5" stroke-width="1.5" marker-end="url(#l3b)"/>
+<text x="820" y="200" text-anchor="middle" style="font-size:12px" fill="#2C2C2A">n分</text>
+<text x="820" y="220" text-anchor="middle" style="font-size:12px" fill="#2C2C2A">〜1時間</text>
+<text x="820" y="290" text-anchor="middle" style="font-size:12px" fill="#993C1D">n時間</text>
+<text x="820" y="380" text-anchor="middle" style="font-size:12px" fill="#042C53">n日〜週</text>
+<text x="855" y="245" text-anchor="middle" style="font-size:11px" fill="#5F5E5A" transform="rotate(90 855 245)">外へいくほど長い</text>
+</svg>
+
+</div>
+
+<div class="text-xs opacity-50 mt-2">出典: Andrew Ng "3 Loops for 0-to-1 AI Products"（Osmaniとは別出典）</div>
 
 ---
 
@@ -1353,6 +1432,43 @@ AIが速く回せるほど、1つずつ承認する人間が追いつかなく�
 - 全てAIに任せるのではない
 - 全て人間がやるのでもない
 - 3層構造のうち、**どこに人間のインプットを置くのか**を決める
+
+<v-click>
+
+<div class="text-sm opacity-70 mt-4 mb-2">「人間が手を動かすのは第二層だけ」と見えます。でも、人間の関わり方は層ごとに違います</div>
+
+<div class="grid grid-cols-3 gap-4 text-sm">
+
+<div class="bordered-box">
+
+**第一層｜事前に枠を決める**
+トリガー・任せる範囲・完了指標を、動かす前に設計しておく<span class="text-xs opacity-60"></span>
+
+</div>
+
+<div class="bordered-box">
+
+**第二層｜走行中に方向づける**
+成果物を見て舵を切る。リアルタイムで手を動かす操縦席
+
+</div>
+
+<div class="bordered-box">
+
+**第三層｜評価を回収する仕組みを作る**
+外部の声は自然には集まらない。誰の評価をどう仕様へ戻すか、その回路を設計する
+
+</div>
+
+</div>
+
+</v-click>
+
+<v-click>
+
+<div class="text-sm mt-3">操作するのは第二層。でも<strong>設計するのは3層すべて</strong>。ここに人間の価値が残ります</div>
+
+</v-click>
 
 <v-click>
 
@@ -1476,171 +1592,43 @@ AIが速く回せるほど、1つずつ承認する人間が追いつかなく�
 -->
 
 ---
-
-# 4-8. システム構築の基礎（一枚絵）
-
-<div class="text-sm opacity-70 mb-2">開発の進め方には大きく2つの型がある（詳細用語は覚えなくてOK）</div>
-
-<!-- ウォーターフォール（直線）とアジャイル（反復ループ）の対比図。角丸なし、横長viewBox+w-full、フォント小さめ -->
-
-<div class="flex flex-col items-center w-full">
-
-<svg viewBox="0 0 900 300" xmlns="http://www.w3.org/2000/svg" role="img" class="w-full" style="max-height: 250px;" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Noto Sans JP',sans-serif">
-<title>ウォーターフォールとアジャイルの開発モデル対比図</title>
-<desc>ウォーターフォールは企画から運用まで一方向に進む。アジャイルは設計・開発・テストを短く反復する</desc>
-
-<defs>
-<marker id="wf" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-<path d="M0,0 L10,5 L0,10 z" fill="#5F5E5A"/>
-</marker>
-</defs>
-
-<text x="30" y="28" style="font-size:15px" font-weight="700" fill="#2C2C2A">ウォーターフォール：一方向に順番に進む</text>
-
-<rect x="30" y="46" width="118" height="46" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/>
-<text x="89" y="75" text-anchor="middle" style="font-size:13px" fill="#0C447C">企画</text>
-<rect x="178" y="46" width="118" height="46" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/>
-<text x="237" y="75" text-anchor="middle" style="font-size:13px" fill="#0C447C">設計</text>
-<rect x="326" y="46" width="118" height="46" fill="#D85A30" stroke="#993C1D" stroke-width="1.5"/>
-<text x="385" y="75" text-anchor="middle" style="font-size:13px" fill="#FFFFFF">開発</text>
-<rect x="474" y="46" width="118" height="46" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/>
-<text x="533" y="75" text-anchor="middle" style="font-size:13px" fill="#0C447C">テスト</text>
-<rect x="622" y="46" width="118" height="46" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/>
-<text x="681" y="75" text-anchor="middle" style="font-size:13px" fill="#0C447C">リリース</text>
-<rect x="770" y="46" width="118" height="46" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/>
-<text x="829" y="75" text-anchor="middle" style="font-size:13px" fill="#0C447C">運用</text>
-<path d="M148,69 L176,69" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#wf)"/>
-<path d="M296,69 L324,69" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#wf)"/>
-<path d="M444,69 L472,69" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#wf)"/>
-<path d="M592,69 L620,69" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#wf)"/>
-<path d="M740,69 L768,69" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#wf)"/>
-
-<line x1="30" y1="120" x2="888" y2="120" stroke="#D3D1C7" stroke-width="1"/>
-
-<text x="30" y="150" style="font-size:15px" font-weight="700" fill="#2C2C2A">アジャイル：短く作って試すを繰り返す</text>
-
-<rect x="300" y="172" width="118" height="46" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/>
-<text x="359" y="201" text-anchor="middle" style="font-size:13px" fill="#0C447C">設計</text>
-<rect x="448" y="172" width="118" height="46" fill="#D85A30" stroke="#993C1D" stroke-width="1.5"/>
-<text x="507" y="201" text-anchor="middle" style="font-size:13px" fill="#FFFFFF">開発</text>
-<rect x="596" y="172" width="118" height="46" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/>
-<text x="655" y="201" text-anchor="middle" style="font-size:13px" fill="#0C447C">テスト</text>
-<path d="M418,195 L446,195" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#wf)"/>
-<path d="M566,195 L594,195" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#wf)"/>
-<path d="M655,218 Q655,258 507,258 Q359,258 359,220" fill="none" stroke="#185FA5" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#wf)"/>
-<text x="507" y="278" text-anchor="middle" style="font-size:12px" fill="#185FA5">短いサイクルで繰り返す</text>
-</svg>
-
-</div>
-
-<v-click>
-
-<div class="text-center text-lg mt-2"><strong>AIエージェントは、現時点では「開発」フェーズに最も貢献する</strong></div>
-
-</v-click>
-
-<!--
-発表者ノート:
-- SDLCの詳細用語は出さない。2つの型があること、どちらも「開発」の工程を含むことだけ伝える
-- 開発フェーズ（オレンジ）を両モデルで強調 → AIエージェントが最も効くのはここ、につなぐ
--->
-
+layout: section
 ---
 
-# 4-9. 実例：ビジネスアイデアをAIと一緒に構造化する
-
-<div class="grid grid-cols-2 gap-8 items-center mt-2">
-
-<div>
-
-自身が新規事業を検討した際、Claudeと対話しながら思考を進めた実例
-
-<v-click>
-
-現状、スマートデバイスとAIを用いた効率化を目指している
-<br>
-https://www.guide-series.com/products/guide01/
-
-</v-click>
-
-<v-click>
-
-ポイントは「AIに答えを出させた」のではなく、
-「思考を構造化し、論点を可視化しながら、最終判断は自分で行った」こと
-
-</v-click>
-
-</div>
-
-<div class="text-center">
-
-<img src="/IMG_1957.png" alt="AIと対話しながら新規事業を構造化した実例" class="w-full max-h-100 object-contain rounded-none" />
-
-</div>
-
-</div>
-
----
-
-# 4-10. 検討の変遷
-
-<h3>1. 最初のアイデアを思いつく</h3>
-<br>
-<h3>2. AIが前提を事実確認する（すでに世の中にある技術と重複していないか）</h3>
-<br>
-<h3>3. AIが価値提案の弱点を率直に指摘する → 方向を修正</h3>
-<br>
-<h3>4. AIが検討を進めるための考え方の型（フレームワーク）を提示する</h3>
-<br>
-<h3>5. 自分の現場知識・専門性を投入した瞬間、話の質が変わる → 方針転換</h3>
-
----
-
-# 4-11. 対話の中の役割分担
-
-| 役割 | 内容 |
-|---|---|
-| **AIが担ったこと** | 前提の事実確認／価値提案の弱点の指摘／考え方の型（フレームワーク）の提示／論点の整理 |
-| **自分が担ったこと** | 現場知見の投入／最終判断／方向転換の意思決定 |
-
-<v-click>
-
-これがまさに、先ほど見た「ループ設計」＝**どこに人間を置くか**の実例です
-
-</v-click>
-
----
-
-# 4-12. ここから見える「実装への一歩」
-
-このプロセスを実際に動くしくみにするなら、次のように設計を進めます
-
-| 項目 | 考え方 |
-|---|---|
-| ①業務のどの部分か | 型が決まっている定型作業（現場の判断が必要な部分は残す） |
-| ②AIエージェントの役割 | 条件をもとにたたき台（下書き・データ）を作る |
-| ③人間の役割 | 最終的に「これは使えるか」を判断する |
-| ④実装するなら何を使うか | 条件を入力するフォーム＋生成AIの組み合わせ（L2〜L3） |
-
-<div class="text-xs opacity-50 mt-4">この4項目が、第6章で使う「ループ設計ワークシート」の型になります</div>
+## それでは、一旦ご自身の状況を振り返りましょう。
 
 ---
 
 # 4-13. 「あなたは今どこにいるか」自己診断
 
-<div class="text-sm opacity-70 mb-3">当てはまる一番上のレベルが、いまのあなたの立ち位置です</div>
+<div class="text-sm opacity-70 mb-4">当てはまる一番上のレベルが、いまのあなたの立ち位置です</div>
 
-<div class="text-base leading-relaxed">
+<div class="flex flex-col gap-2 text-sm">
 
-<h3>- L1 — AIに質問して、答えをそのまま使っている</h3>
+<div class="flex items-baseline gap-3 pl-3" style="border-left:3px solid #7C8290">
+<span class="font-bold" style="color:#0b2f64; min-width:150px">L1：チャット</span>
+<span>AIに質問して、答えをそのまま使っている</span>
+</div>
 <br>
-<h3>- L2 — よく使う指示を「型」として用意し、安定した答えを引き出せる</h3>
+<div class="flex items-baseline gap-3 pl-3" style="border-left:3px solid #5B6BA6">
+<span class="font-bold" style="color:#0b2f64; min-width:150px">L2：プロンプト</span>
+<span>よく使う指示を「型」として用意し、安定した答えを引き出せる</span>
+</div>
 <br>
-<h3>- L3 — AIに複数の作業を任せ、一連の流れを自動で実行させたことがある</h3>
+<div class="flex items-baseline gap-3 pl-3" style="border-left:3px solid #3F7A9E">
+<span class="font-bold" style="color:#0b2f64; min-width:150px">L3：エージェント</span>
+<span>AIに複数の作業を任せ、一連の流れを自動で実行させたことがある</span>
+</div>
 <br>
-<h3>- L4 — 複数のAIや業務を横断してつなげた経験がある</h3>
+<div class="flex items-baseline gap-3 pl-3" style="border-left:3px solid #4E8A6B">
+<span class="font-bold" style="color:#0b2f64; min-width:150px">L4：マルチエージェント</span>
+<span>複数のAIや業務を横断してつなげた経験がある</span>
+</div>
 <br>
-<h3>- L5 — AIが自律的に回り続ける仕組みを設計している</h3>
+<div class="flex items-baseline gap-3 pl-3" style="border-left:3px solid #C8922B">
+<span class="font-bold" style="color:#0b2f64; min-width:150px">L5：ループ／ハーネス</span>
+<span>AIが自律的に回り続ける仕組みを設計している</span>
+</div>
 
 </div>
 
@@ -1651,18 +1639,23 @@ https://www.guide-series.com/products/guide01/
 </div>
 
 ---
-
----
-layout: center
+layout: default
 ---
 
 # 4-14. アイデアソン参加者の到達目標レベル
 
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class=center>
 <v-click>
 
-<h2>L3を「理解している」状態で、アイデアソンに臨みましょう</h2>
+<h2> -> L3を「理解している」状態で、アイデアソンに臨みましょう</h2>
 
 </v-click>
+</div>
 
 ---
 
@@ -1694,7 +1687,11 @@ class: text-center
 
 # 5-1. ワークスロップへの対応
 
+<br>
 AIが生成した、体裁は整っているが中身の薄い成果物のことを「ワークスロップ（workslop）」と呼びます
+
+<br>
+<br>
 
 <v-click>
 
@@ -1705,6 +1702,12 @@ AIが生成した、体裁は整っているが中身の薄い成果物のこと
 </v-click>
 
 <div class="text-xs opacity-50 mt-6">出典: BetterUp Labs / Harvard Business Review（2025）</div>
+
+---
+layout: section
+---
+
+## せめて自分は生み出さないようにしたい。
 
 ---
 
@@ -1867,11 +1870,11 @@ class: text-center
 
 <!-- 強メッセージ。中央太字 -->
 
-# **自分を高める作業は、<br>決して怠らない**
+# **自己鍛錬、創意工夫を怠らない。**
 
 <div v-click class="mt-10 text-xl">
 
-AIも、人も、両方を活かす。<br>その上で。
+使えるものは、すべて使いましょう。
 
 </div>
 
@@ -1889,6 +1892,14 @@ AIも、人も、両方を活かす。<br>その上で。
 - 出力を検証できるのは、**自分自身のドメイン知識だけ**です
 - SC経営士としての現場知見こそが、AIを武器にする唯一の土台です
 
+<div v-click class="mt-10 text-xl">
+
+AIの生成はあくまで『参考』に。判断は人間が行う。
+<br>
+*AI生成のデータで意思決定する場合は、組織のガバナンスを定義する。
+
+</div>
+
 ---
 
 # 5-8. AIに頼る前に揃えるべきもの
@@ -1897,15 +1908,26 @@ AIも、人も、両方を活かす。<br>その上で。
 - 業務プロセスの言語化・標準化
 - AIは「データと言語」がなければ動きません
 
+<div v-click class="mt-10 text-xl">
+
+自身や組織が持つデータを『見える化』『共通化』する。
+
+</div>
+
 ---
 
 # 5-9. PoC実装のバッドプラクティス
+
+<br>
+<br>
 
 - **作って終わり**：使う人を想定せずに作ったシステムは使われない
 - **ユーザー視点の欠如**：技術が優れていても現場に馴染まなければ意味がない
 - **発注丸投げ**：発注側がドメイン知識を持たないと要件がズレる
 - **過剰な期待**：AIは万能ではない
 - **逆も然り**：過小評価してAIを使わないままでいることも、同じくらい機会損失になる
+
+<br>
 
 <v-click>
 
@@ -1915,15 +1937,79 @@ AIも、人も、両方を活かす。<br>その上で。
 </v-click>
 
 ---
-layout: section
+
+# 5-10. 投入データの安全性をどう確保するか？
+
+<div class="text-base leading-relaxed mt-6">
+
+近年、AIをめぐる脅威の一つとして、<strong>投入したデータがどこへ行くのか</strong>が問われるようになりました。
+
+<div class="mt-4 pl-3" style="border-left:3px solid #993C1D">
+モデルやサービスによっては、入力したデータが<strong>そのまま学習に使われたり、Web上に公開されたり</strong>することもあります。
+</div>
+
+</div>
+
+<div v-click class="text-xl font-bold mt-10">
+では、どう対策すればいいのか？
+</div>
+
+<div v-click class="text-lg mt-4">
+現状、大きく<strong>3つの対策</strong>があると考えます。<span class="text-sm opacity-60">（次ページ）</span>
+</div>
+
+
+---
+layout: default
+class: bg-white
 ---
 
-# 第6章
-## アイデアソンへ向けて
+# データの安全性 ── 3段階で守りを固める
+
+<div class="text-sm opacity-70 mb-4">下にいくほど守りは固くなります。まず①から始め、扱うデータの機微さに応じて②③へ引き上げます</div>
+
+<div class="grid grid-cols-1 gap-3 text-sm">
+
+<div v-click>
+<div class="bordered-box">
+
+#### **フェーズ1：手元でデータを隠してから渡す**
+氏名・住所・売上などの重要な部分を、AIに渡す前に伏せ字や仮の値へ置き換えます。<br>
+<span class="text-xs opacity-60">誰でも今日から始められる第一歩。ただし「隠し忘れ」が残るため、これだけに頼りきらないのが前提です。</span>
+
+</div>
+</div>
+
+<div v-click>
+<div class="bordered-box">
+
+#### **フェーズ2：安全なツールを選ぶ**
+「入力を学習に使わない」と明言された法人向けプラン・契約のサービスを使います。<br>
+<span class="text-xs opacity-60">設定と契約の確認だけで効果が大きく、実務ではここが本命。多くの業務はこの段階で十分守れます。</span>
+
+</div>
+</div>
+
+<div v-click>
+<div class="bordered-box">
+
+#### **フェーズ3：ローカルLLMで外に出さない**
+自社の手元環境でAIを動かし、データを一切インターネットに出しません。<br>
+<span class="text-xs opacity-60">最も守りは固い一方、環境構築や性能の制約もあります。特に機微なデータを扱う場合の選択肢です。</span>
+
+</div>
+</div>
+
+</div>
+
+<div v-click class="text-sm mt-4">
+大切なのは「全部ローカルにすれば安心」ではなく、<strong>扱うデータの重要度に、守りの強さを合わせる</strong>ことです。
+</div>
 
 ---
 
-# 6-1. 前提：これは「業務改善」であり、指標が要る
+
+# 5-11. AI関連業務の評価指標について
 
 <div class="text-base leading-relaxed mt-2">
 
@@ -1938,7 +2024,7 @@ layout: section
 
 <div v-click class="mt-5">
 
-<div class="text-sm opacity-70 mb-2">測定指標は、対象業務によって大きく2つに分かれます</div>
+<div class="text-sm opacity-70 mb-2">測定指標は、対象業務によって大きく2つに分かれます。</div>
 
 | 対象 | 主な測定指標 |
 |---|---|
@@ -1949,7 +2035,8 @@ layout: section
 
 <div v-click class="mt-4 text-sm">
 
-新規業務では、即時のROIを求めません。<strong>蓄積されること自体が成果</strong>です。<br>
+新規業務では、即時のROIを求めない傾向にあると考えます。<strong>蓄積されること自体が成果</strong>です。<br>
+<br>
 ただし「蓄積されているが使われていない」状態は、成功とは言えません。
 
 </div>
@@ -1961,12 +2048,25 @@ layout: section
 -->
 
 ---
+layout: section
+---
 
-# 6-2. 明日からできること① ── AIへの指示を具体的にする
+# 第6章
+## アイデアソンへ向けて
 
-<div class="text-sm opacity-70 mb-4">曖昧な言葉を、数字・期日・対象まで落とす。これだけで成果が変わる</div>
+---
+layout: section
+---
 
-<div class="text-sm">
+## 皆さんが『明日から』できることは**3つ**です。
+
+---
+
+# 6-1. 明日からできること① ─ AIへの指示を具体的にする
+
+<div class="text-sm opacity-70 mb-4">曖昧な言葉を、数字・期日・対象まで落としましょう。</div>
+
+<div v-click class="text-sm">
 
 | 曖昧な言葉 | 具体化した指示 |
 |---|---|
@@ -1984,7 +2084,9 @@ layout: section
 
 ---
 
-# 6-3. 明日からできること② ── チャットを"卒業"する
+# 6-2. 明日からできること② ─ チャットを"卒業"する
+
+<br>
 
 <div class="text-base leading-relaxed mt-2">
 
@@ -1996,13 +2098,14 @@ layout: section
 
 <div v-click class="mt-5">
 
-**次の一歩**：Claude Code などの<strong>エージェント型</strong>を、IDE（VS Code / Kiro など）で使ってみましょう。
+**次の一歩**：<strong>エージェント型</strong>の使い方を試してみましょう。<br>
+Claude Code だけでなく、<strong>Gemini（Spark）</strong>も <strong>Microsoft Copilot</strong> も、いま使っているツールのまま一段深く踏み込めます。
 
 </div>
 
 <div v-click class="mt-5">
 
-**なぜIDE？**：スキル・フック・サブエージェントは、チャット画面では体験できません。<strong>エージェントを"飼う"には、その場所が必要になります</strong>。
+**チャットとの違い**：目標を渡すと、AIが自分で手順を組んで実行まで進めます。<strong>「質問して答えをもらう」から「任せて仕上げてもらう」へ</strong>変わります。
 
 </div>
 
@@ -2010,7 +2113,8 @@ layout: section
 
 <div v-click class="text-center mt-6 text-lg">
 
-作るものは何でも構いません。大切なのは<strong>「一段組み込んだ使い方」にご自身で触れてみる</strong>ことです
+作るものは何でも構いません。大切なのは<strong>「一段組み込んだ使い方」にご自身で触れてみる</strong>ことです<br>
+<span class="text-sm opacity-60">具体的な始め方は、次ページにまとめました</span>
 
 </div>
 
@@ -2026,7 +2130,91 @@ layout: default
 class: bg-white
 ---
 
-# 6-4. 最初から完璧を目指さない
+# 6-2'. エージェント型の始め方 ── 3つのツール
+
+<div class="text-sm opacity-70 mb-3">選ぶツールは違っても、<strong>使い方の流れは3つとも同じ</strong>です。始めるための前提だけ、下に整理しました</div>
+
+<div class="grid grid-cols-3 gap-4 text-sm">
+
+<div class="bordered-box">
+
+**Gemini**<span class="text-xs opacity-60"> ／ Google</span>
+
+<div class="text-xs leading-relaxed mt-1">
+<strong>使う場所</strong>：Webブラウザ<br>
+<strong>必要なもの</strong>：有料プラン（要確認）<br>
+<strong>ログインID</strong>：Google アカウント
+</div>
+
+<div class="text-xs mt-2" style="color:#993C1D">Google Workspace 中心の方に</div>
+
+</div>
+
+<div class="bordered-box">
+
+**Microsoft Copilot**<span class="text-xs opacity-60"> ／ Microsoft</span>
+
+<div class="text-xs leading-relaxed mt-1">
+<strong>使う場所</strong>：Webブラウザ／各Officeアプリ<br>
+<strong>必要なもの</strong>：有料プラン（要確認）<br>
+<strong>ログインID</strong>：Microsoft アカウント
+</div>
+
+<div class="text-xs mt-2" style="color:#993C1D">Microsoft 365 導入企業に</div>
+
+</div>
+
+<div class="bordered-box">
+
+**Claude Code**<span class="text-xs opacity-60"> ／ Anthropic</span>
+
+<div class="text-xs leading-relaxed mt-1">
+<strong>使う場所</strong>：専用ツール（PCにインストール）<br>
+<strong>必要なもの</strong>：有料プラン（要確認）<br>
+<strong>ログインID</strong>：Anthropic アカウント
+</div>
+
+<div class="text-xs mt-2" style="color:#993C1D">手元で大量のファイルを扱う方に</div>
+
+</div>
+
+</div>
+
+<div v-click class="mt-5">
+
+<div class="text-sm font-bold mb-2" style="color:#0b2f64">使い方は、3つとも同じ流れです</div>
+
+<div class="text-sm pl-3" style="border-left:3px solid #993C1D">
+① やってほしいゴールを、日本語で伝える<br>
+② AIが実行の計画・提案を出す<br>
+③ 人がその内容を確認して、承認する<br>
+④ 承認された作業をAIが進める
+</div>
+
+</div>
+
+<div v-click class="text-xs opacity-60 mt-3">
+※ 必要なプランや対応機能は変わることがあります。導入前に各サービスの公式情報でご確認ください
+</div>
+
+<!--
+発表者ノート:
+- 「どれか一つが正解」ではなく、自社の主戦場（Google/Microsoft/ローカル）で選ぶ、と伝える
+- 個別の操作手順はあえて載せていない。UIやプランが頻繁に変わるため、当日の断定は避ける
+  - 「必要なプランは各社の公式で要確認」と口頭でも念押しする
+- ここで強調したいのは「3つとも、ゴールを伝える→計画を確認→承認→実行、という同じ流れ」であること
+- プラン等の詳細は公式情報へ誘導（ハンドアウトやリンク集で補う想定）
+- 3-1のL3（エージェント構築）を、具体的な製品名で「明日から」に落とすスライド
+-->
+
+---
+layout: default
+class: bg-white
+---
+
+# 6-3. 明日からできること③ ─ まず作ってみる。
+
+#### そして、最初から完璧を目指さない
 
 <div class="text-lg leading-relaxed mt-6">
 
@@ -2053,158 +2241,93 @@ class: bg-white
 
 </div>
 
-<!--
-発表者ノート:
-- Mitchell「わざと二度手間をやった。苦痛だったが、そこで専門性が形成された」
-- Claude公式「個別の修正で止めず、将来の全反復のためにシステムに書き込め」
-- 完璧主義を解除し、ワークセッションで手が動くようにする心構えとして渡す
--->
-
+---
+layout: default
 ---
 
-# 6-5. ループ設計ワークシート
+## まとめ
 
-<div class="text-sm opacity-70 mb-3">自分のビジネスにAIを組み込むなら、という視点で4つを埋めていく（4-12で見た型と同じ）</div>
+<br>
 
-| 項目 | 問い |
-|---|---|
-| ①業務のどの部分か | どの業務を対象にするか（型が決まった定型作業から選ぶ） |
-| ②AIエージェントの役割 | AIに何を任せるか（たたき台・下書き・データ作成） |
-| ③完了指標（重要） | 「何をもって完了とするか」を具体的に（6-1の要領で） |
-| ④人間の役割 | 最終的に誰が・何を判断するか |
+# 1. AIへの指示を具体的にする
+<br>
 
-<div class="text-xs opacity-50 mt-4">完璧な答えは不要。まず「どこにAIを、どこに人間を置くか」を言葉にすることが目的</div>
+# 2. チャットを"卒業"する
+<br>
 
----
-
-# 6-6. ワークセッション ── 業務を「ループ」にできるか
-
-<div class="text-base leading-relaxed mt-2">
-
-<div v-click>
-
-1. 自分のドメインの業務を、いくつかの<strong>工程に分解</strong>してみましょう
-
-</div>
-
-<div v-click class="mt-3">
-
-2. 各工程で「これは<strong>エージェントに任せられるか？</strong>」を判定してみましょう
-
-</div>
-
-<div v-click class="mt-3">
-
-3. 任せる工程に<strong>完了指標</strong>を決めます（何が揃えば"完了"か）
-
-</div>
-
-<div v-click class="mt-3">
-
-4. つなげて、<strong>擬似的な自動ループ</strong>として組めないか設計してみましょう
-
-</div>
-
-</div>
-
-<div v-click class="text-xs opacity-60 mt-5">正解を出す場ではありません。半年間のアイデアソンで深めるための「最初の問い」を作る場です</div>
-
----
-
-# 6-7. ワークシート（この図に書き込みます）
-
-<div class="text-sm opacity-70 mb-1">A3で印刷し、グループで空欄を埋めながら「業務のループ」を設計してみましょう</div>
-
-<!-- 印刷用ループ設計ワークシート。空欄の吹き出しに手書きで書き込む前提。角丸なし、横長w-full -->
-
-<div class="flex justify-center w-full">
-
-<svg viewBox="0 0 860 420" xmlns="http://www.w3.org/2000/svg" role="img" class="w-full" style="max-height: 360px;" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Noto Sans JP',sans-serif">
-<title>書き込み式ループ設計ワークシート</title>
-<desc>トリガー・エージェントの作業・完了指標・人間の判断の4つの空欄に書き込み、循環として設計するワークシート</desc>
-
-<defs>
-<marker id="ws" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-<path d="M0,0 L10,5 L0,10 z" fill="#5F5E5A"/>
-</marker>
-</defs>
-
-<text x="230" y="40" font-size="9" font-weight="700" fill="#993C1D">① いつ始める？（トリガー）</text>
-<rect x="230" y="52" width="330" height="60" fill="transparent" stroke="#993C1D" stroke-width="1.5"/>
-
-<text x="600" y="175" font-size="9" font-weight="700" fill="#042C53">② AIに何をさせる？</text>
-<rect x="600" y="187" width="240" height="60" fill="transparent" stroke="#185FA5" stroke-width="1.5"/>
-
-<text x="230" y="330" font-size="9" font-weight="700" fill="#993C1D">③ 何が揃えば「完了」？（完了指標）</text>
-<rect x="230" y="342" width="330" height="60" fill="transparent" stroke="#993C1D" stroke-width="1.5"/>
-
-<text x="20" y="175" font-size="9" font-weight="700" fill="#2C2C2A">④ 人間が判断すること</text>
-<rect x="20" y="187" width="240" height="60" fill="transparent" stroke="#5F5E5A" stroke-width="1.5"/>
-
-<path d="M560,95 Q660,120 720,184" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#ws)"/>
-<path d="M720,247 Q660,320 562,345" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#ws)"/>
-<path d="M230,352 Q120,330 140,250" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#ws)"/>
-<path d="M140,187 Q160,120 228,86" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#ws)"/>
-</svg>
-
-</div>
-
-<div class="text-xs opacity-50 mt-1">4つの空欄が埋まり、矢印でひと回りすれば、それがあなたの業務の「ループ設計」の第一歩です</div>
-
-<!--
-発表者ノート:
-- 当日はこの図をA3で配布。グループで空欄に手書きしてもらう
-- 4つの枠は 4-6の部品・4-7のループ図・6-1の完了指標に対応。埋めれば擬似ループになる
-- 完璧でなくてよい（6-3の失敗前提）。まず一周させることが目的
--->
-
+# 3. まず作ってみる
+<br>
 
 ---
 layout: center
-title: 論点への回答
+title: 論点への回答①
+---
+
+## 論点の振り返り
+
+<div class="text-sm opacity-70 mt-2 mb-4 text-center">冒頭で、こんな問いと本音をお伝えしました。覚えていらっしゃいますか</div>
+
+<div class="text-center center">
+
+<h3>① なぜ私たちはAIを学ぶの？</h3>
+<div class="text-base opacity-60">→ みんな使ってるし確かに便利だけど、いまいち流されてる気がする</div>
+
+<br>
+
+<h3>② どうAIと向き合っていけばいいの？</h3>
+<div class="text-base opacity-60">→ 毎月新しいニュースが出てるし、正直追いつけない</div>
+
+<br>
+
+<h3>③ 今日聞いてたら何が嬉しいの？</h3>
+<div class="text-base opacity-60">→ 具体的に明日から使えるワザとかないでしょ</div>
+
+</div>
+
+<div class="text-center mt-5 text-lg">では、いまなら何と答えられるでしょうか。</div>
+
+---
+layout: center
+title: 論点への回答②
 ---
 
 <div class="text-center center">
 
-<v-click>
 
-<h2>① なぜ私たちはAIを学ぶの？</h2>
+<h3>① なぜ私たちはAIを学ぶの？</h3>
 
-</v-click>
 
 <br>
 
 <v-click>
 
-<h3>→ みんな使ってるし、確かに便利だけど、いまいち流されてる気がする</h3>
+<h2>→ 豊かになり、これからも選ばれ続けるため</h2>
 
 </v-click>
 
 <br>
 
-<v-click>
 
-<h2>② どうAIと向き合っていけばいいの？</h2>
-
-</v-click>
-
-<v-click>
-
-<h3>→ 毎月新しいニュースが出てるし、正直追いつけない</h3>
-
-</v-click>
+<h3>② どうAIと向き合っていけばいいの？</h3>
 
 <br>
 
 <v-click>
 
-<h2>③ 今日聞いてたら何が嬉しいの？</h2>
+<h2>→ ツールに惑わされず、本質を抑える努力を続ける</h2>
 
 </v-click>
 
+<br>
+
+
+<h3>③ 今日聞いてたら何が嬉しいの？</h3>
+
+<br>
+
 <v-click>
 
-<h3>~~具体的に明日から使えるワザってあるの？~~</h3>
+<h2>→ 明日から磨ける、3つのスキルが持ち帰れます</h2>
 
 </v-click>
 
@@ -2217,25 +2340,27 @@ class: bg-white
 
 # 最後に ── これから磨きたい3つのスキル
 
+<br>
+
 <div class="text-base leading-relaxed mt-4">
 
 <div v-click>
 
-**1. 問題を整理・分解する力（ビジネススキル）**
+## **1. 問題を整理・分解する力（ビジネススキル）**
 課題を分け、解決までの道筋を自分の中で描けること。<span class="text-xs opacity-60">← 今日のワークセッション</span>
 
 </div>
 
 <div v-click class="mt-5">
 
-**2. AIを使いこなす力**
+## **2. AIを使いこなす力**
 次々出てくるAIやツールを、仕組みごと理解して選び・使えること。<span class="text-xs opacity-60">← 5段階レベル（第3章）</span>
 
 </div>
 
 <div v-click class="mt-5">
 
-**3. AIを"束ねる"力（ループを設計する力）**
+## **3. AIを"束ねる"力（ループを設計する力）**
 複数のAIを並列で動かし、どこに人間を置くかを設計すること。<span class="text-xs opacity-60">← Loop / Harness（第4章）</span>
 
 </div>
@@ -2255,27 +2380,6 @@ class: bg-white
 - この後の締め（問いはいくつ増えた）へつなぐ
 -->
 
----
-layout: section
-title: 具体的なActionItem
----
-
-<div class="text-center center">
-
-<v-click>
-
-<h2>② なぜAIを学ぶのか</h2>
-
-</v-click>
-
-<v-click>
-
-<h3>→ </h3>
-
-</v-click>
-
-</div>
-
 
 ---
 layout: center
@@ -2284,7 +2388,7 @@ class: text-center
 
 <!-- 締めのディスカッション。冒頭ゴール「問いを持ち帰る」を回収 -->
 
-# **今日、AIへの「問い」は<br>いくつ増えましたか？**
+# **今日、AIへの「問い」、や「やりたいこと』は<br>いくつ増えましたか？**
 
 <div v-click class="mt-10 text-xl">
 
@@ -2309,10 +2413,29 @@ class: bg-white
 title: Appendix
 ---
 
-# Appendix
+# Appendix ── もっと知りたい人へ
 
-1. programmingと機械学習の課題解決アプローチの違い
-2.　
+<div class="text-sm opacity-70 mb-4">本編で触れきれなかった補足資料です。3つのテーマに分けています</div>
+
+<div class="text-base leading-relaxed">
+
+**A. プログラミングと機械学習の違い**<span class="text-xs opacity-60"> ── コードで見る「1か所」の差</span>
+
+**B. どのツール・手法を使うか**<span class="text-xs opacity-60"> ── 生成AIか従来か、主要エージェントの特性</span>
+
+**C. AIと協働した実例**<span class="text-xs opacity-60"> ── 新規事業をAIと構造化したプロセス</span>
+
+</div>
+
+---
+layout: section
+class: bg-white
+title: Appendix A｜プログラミングと機械学習の違い
+---
+
+## A. プログラミングと機械学習の違い
+
+<div class="text-sm opacity-70 mt-3">「ルールを人が書くか、データから学ぶか」── その差をコードで見ます</div>
 
 ---
 layout: default
@@ -2378,6 +2501,16 @@ def approve(income, score, debt):
 -->
 
 ---
+layout: section
+class: bg-white
+title: Appendix B｜どのツール・手法を使うか
+---
+
+## B. どのツール・手法を使うか
+
+<div class="text-sm opacity-70 mt-3">生成AIか従来か。そして、主要なAIエージェントはそれぞれ何が得意なのか</div>
+
+---
 layout: center
 class: text-center
 ---
@@ -2427,3 +2560,212 @@ title: ツールとの向き合い方について
 - 構造化データの数値予測・分類・異常検知 → 従来の機械学習が速くて安い
 - このセミナーのゴール（問いを持ち帰る）に合わせ、聴衆に問いを渡す形で締める
 -->
+
+---
+layout: default
+class: bg-white
+title: 主要AIエージェントの特性
+---
+
+# 主要AIエージェントの特性 ── 得意分野で選ぶ
+
+<div class="text-sm opacity-70 mb-3">同じ「エージェント型」でも、出自が違えば得意分野も違います。自社の主戦場で選ぶのがコツです</div>
+
+<div class="text-center mb-3">
+<img src="/Gemini_Generated_Image_mk5d6kmk5d6kmk5d.jpeg" alt="Google Gemini・MS Copilot・Claude Code の役割と特性を可視化した俯瞰図" class="w-full max-h-70 object-contain rounded-none" />
+</div>
+
+<div class="grid grid-cols-3 gap-4 text-sm">
+
+<div class="bordered-box">
+
+**Google Gemini**<span class="text-xs opacity-60"> ／ 調査・構想の相棒</span><br>
+Webブラウザベースで動くため、<strong>最新の情報にキャッチアップしやすい</strong>。広い知識を集めて調べ、まとめる作業に強い。
+
+</div>
+
+<div class="bordered-box">
+
+**MS Copilot**<span class="text-xs opacity-60"> ／ 業務ワークフロー自動化</span><br>
+Microsoft製品との連携が強力。<strong>Entra（IT基盤）と結びつき、端末ごと管理できる</strong>。社内データを安全に扱う業務に向く。
+
+</div>
+
+<div class="bordered-box">
+
+**Claude Code**<span class="text-xs opacity-60"> ／ 生産に特化</span><br>
+ファイルを直接操作し、<strong>コードや成果物を「作る」ことに特化</strong>。手元で何かを生産・自動修正していく用途に強い。
+
+</div>
+
+</div>
+
+<!--
+発表者ノート:
+- 出典画像: memo由来の俯瞰図（Gemini / Copilot / Claude Code の役割と特性）
+- Gemini: Webブラウザベース → 最新技術・情報へのキャッチアップが速い（調査・構想）
+- Copilot: MS製品に強い＋Entra連携で端末ごとIT管理できる（社内ワークフロー自動化）
+- Claude Code: コード生成・ファイル生産に特化（手元での生産）
+- 6-2「3つのツール」を、より深く特性面から補足するAppendix。優劣ではなく主戦場で選ぶ、と伝える
+-->
+
+---
+
+# システム構築の基礎（一枚絵）
+
+<div class="text-sm opacity-70 mb-2">開発の進め方には大きく2つの型がある（詳細用語は覚えなくてOK）</div>
+
+<!-- ウォーターフォール（直線）とアジャイル（反復ループ）の対比図。角丸なし、横長viewBox+w-full、フォント小さめ -->
+
+<div class="flex flex-col items-center w-full">
+
+<svg viewBox="0 0 900 300" xmlns="http://www.w3.org/2000/svg" role="img" class="w-full" style="max-height: 250px;" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Noto Sans JP',sans-serif">
+<title>ウォーターフォールとアジャイルの開発モデル対比図</title>
+<desc>ウォーターフォールは企画から運用まで一方向に進む。アジャイルは設計・開発・テストを短く反復する</desc>
+
+<defs>
+<marker id="wf" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+<path d="M0,0 L10,5 L0,10 z" fill="#5F5E5A"/>
+</marker>
+</defs>
+
+<text x="30" y="28" style="font-size:15px" font-weight="700" fill="#2C2C2A">ウォーターフォール：一方向に順番に進む</text>
+
+<rect x="30" y="46" width="118" height="46" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/>
+<text x="89" y="75" text-anchor="middle" style="font-size:13px" fill="#0C447C">企画</text>
+<rect x="178" y="46" width="118" height="46" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/>
+<text x="237" y="75" text-anchor="middle" style="font-size:13px" fill="#0C447C">設計</text>
+<rect x="326" y="46" width="118" height="46" fill="#D85A30" stroke="#993C1D" stroke-width="1.5"/>
+<text x="385" y="75" text-anchor="middle" style="font-size:13px" fill="#FFFFFF">開発</text>
+<rect x="474" y="46" width="118" height="46" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/>
+<text x="533" y="75" text-anchor="middle" style="font-size:13px" fill="#0C447C">テスト</text>
+<rect x="622" y="46" width="118" height="46" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/>
+<text x="681" y="75" text-anchor="middle" style="font-size:13px" fill="#0C447C">リリース</text>
+<rect x="770" y="46" width="118" height="46" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/>
+<text x="829" y="75" text-anchor="middle" style="font-size:13px" fill="#0C447C">運用</text>
+<path d="M148,69 L176,69" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#wf)"/>
+<path d="M296,69 L324,69" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#wf)"/>
+<path d="M444,69 L472,69" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#wf)"/>
+<path d="M592,69 L620,69" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#wf)"/>
+<path d="M740,69 L768,69" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#wf)"/>
+
+<line x1="30" y1="120" x2="888" y2="120" stroke="#D3D1C7" stroke-width="1"/>
+
+<text x="30" y="150" style="font-size:15px" font-weight="700" fill="#2C2C2A">アジャイル：短く作って試すを繰り返す</text>
+
+<rect x="300" y="172" width="118" height="46" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/>
+<text x="359" y="201" text-anchor="middle" style="font-size:13px" fill="#0C447C">設計</text>
+<rect x="448" y="172" width="118" height="46" fill="#D85A30" stroke="#993C1D" stroke-width="1.5"/>
+<text x="507" y="201" text-anchor="middle" style="font-size:13px" fill="#FFFFFF">開発</text>
+<rect x="596" y="172" width="118" height="46" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/>
+<text x="655" y="201" text-anchor="middle" style="font-size:13px" fill="#0C447C">テスト</text>
+<path d="M418,195 L446,195" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#wf)"/>
+<path d="M566,195 L594,195" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#wf)"/>
+<path d="M655,218 Q655,258 507,258 Q359,258 359,220" fill="none" stroke="#185FA5" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#wf)"/>
+<text x="507" y="278" text-anchor="middle" style="font-size:12px" fill="#185FA5">短いサイクルで繰り返す</text>
+</svg>
+
+</div>
+
+<v-click>
+
+<div class="text-center text-lg mt-2"><strong>AIエージェントは、現時点では「開発」フェーズに最も貢献する</strong></div>
+
+</v-click>
+
+<!--
+発表者ノート:
+- SDLCの詳細用語は出さない。2つの型があること、どちらも「開発」の工程を含むことだけ伝える
+- 開発フェーズ（オレンジ）を両モデルで強調 → AIエージェントが最も効くのはここ、につなぐ
+-->
+
+<!-- グループC扉 -->
+
+---
+layout: section
+class: bg-white
+title: Appendix C｜AIと協働した実例
+---
+
+## C. AIと協働した実例
+
+<div class="text-sm opacity-70 mt-3">新規事業の検討を、AIと対話しながら構造化していったプロセスの記録です</div>
+
+---
+
+# 実例：ビジネスアイデアをAIと一緒に構造化する
+
+<div class="grid grid-cols-2 gap-8 items-center mt-2">
+
+<div>
+
+自身が新規事業を検討した際、Claudeと対話しながら思考を進めた実例
+
+<v-click>
+
+現状、スマートデバイスとAIを用いた効率化を目指している
+<br>
+https://www.guide-series.com/products/guide01/
+
+</v-click>
+
+<v-click>
+
+ポイントは「AIに答えを出させた」のではなく、
+「思考を構造化し、論点を可視化しながら、最終判断は自分で行った」こと
+
+</v-click>
+
+</div>
+
+<div class="text-center">
+
+<img src="/IMG_1957.png" alt="AIと対話しながら新規事業を構造化した実例" class="w-full max-h-100 object-contain rounded-none" />
+
+</div>
+
+</div>
+
+---
+
+#  検討の変遷
+
+<h3>1. 最初のアイデアを思いつく</h3>
+<br>
+<h3>2. AIが前提を事実確認する（すでに世の中にある技術と重複していないか）</h3>
+<br>
+<h3>3. AIが価値提案の弱点を率直に指摘する → 方向を修正</h3>
+<br>
+<h3>4. AIが検討を進めるための考え方の型（フレームワーク）を提示する</h3>
+<br>
+<h3>5. 自分の現場知識・専門性を投入した瞬間、話の質が変わる → 方針転換</h3>
+
+---
+
+#  対話の中の役割分担
+
+| 役割 | 内容 |
+|---|---|
+| **AIが担ったこと** | 前提の事実確認／価値提案の弱点の指摘／考え方の型（フレームワーク）の提示／論点の整理 |
+| **自分が担ったこと** | 現場知見の投入／最終判断／方向転換の意思決定 |
+
+<v-click>
+
+これがまさに、先ほど見た「ループ設計」＝**どこに人間を置くか**の実例です
+
+</v-click>
+
+---
+
+# ここから見える「実装への一歩」
+
+このプロセスを実際に動くしくみにするなら、次のように設計を進めます
+
+| 項目 | 考え方 |
+|---|---|
+| ①業務のどの部分か | 型が決まっている定型作業（現場の判断が必要な部分は残す） |
+| ②AIエージェントの役割 | 条件をもとにたたき台（下書き・データ）を作る |
+| ③人間の役割 | 最終的に「これは使えるか」を判断する |
+| ④実装するなら何を使うか | 条件を入力するフォーム＋生成AIの組み合わせ（L2〜L3） |
+
+<div class="text-xs opacity-50 mt-4">この4項目が、第6章で使う「ループ設計ワークシート」の型になります</div>
