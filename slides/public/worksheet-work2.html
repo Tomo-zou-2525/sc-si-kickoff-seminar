@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WORK 2 フェーズ2テーマ候補 ── SC×AI キックオフセミナー</title>
+<style>
+  :root {
+    --main: #0b2f64;
+    --accent: #993C1D;
+    --text: #333333;
+    --line: #cccccc;
+    --label-bg: #595e63;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+    color: var(--text);
+    background: #f4f4f4;
+    line-height: 1.6;
+    margin: 0;
+    padding: 24px;
+  }
+  .sheet {
+    background: #ffffff;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 48px;
+    border: 1px solid var(--line);
+  }
+  .kicker {
+    background: var(--main);
+    color: #fff;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 8px 14px;
+    margin: 0 0 20px;
+  }
+  h1 {
+    color: var(--main);
+    font-size: 24px;
+    margin: 0 0 4px;
+  }
+  .subtitle { font-size: 13px; color: #666; margin: 0 0 24px; }
+
+  .meta {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+  .meta label { font-size: 13px; color: var(--main); font-weight: bold; }
+  .meta input {
+    font-family: inherit;
+    font-size: 15px;
+    border: none;
+    border-bottom: 2px solid var(--main);
+    padding: 4px 8px;
+    min-width: 160px;
+    background: transparent;
+    color: var(--text);
+  }
+
+  /* 左ラベル＋右記入欄の行 */
+  .row {
+    display: flex;
+    align-items: stretch;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .row .label {
+    flex: 0 0 130px;
+    background: var(--label-bg);
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 8px;
+    line-height: 1.3;
+  }
+  .row .field {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid var(--main);
+    padding: 8px 12px;
+    min-height: 56px;
+  }
+  .row .hint {
+    font-size: 12px;
+    color: #999;
+    margin-bottom: 4px;
+  }
+  .row textarea {
+    width: 100%;
+    font-family: inherit;
+    font-size: 15px;
+    color: var(--text);
+    border: none;
+    padding: 0;
+    resize: vertical;
+    min-height: 28px;
+    background: transparent;
+  }
+  .row textarea:focus { outline: none; }
+  .row .field:focus-within { outline: 2px solid var(--accent); }
+
+  .note {
+    font-size: 12px;
+    color: #666;
+    margin-top: 20px;
+    border-top: 1px solid var(--line);
+    padding-top: 12px;
+  }
+  .actions {
+    max-width: 1000px;
+    margin: 20px auto 0;
+    text-align: center;
+  }
+  button.print {
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: bold;
+    color: #fff;
+    background: var(--main);
+    border: none;
+    padding: 12px 28px;
+    cursor: pointer;
+  }
+  button.print:hover { opacity: 0.9; }
+
+  @media print {
+    body { background: #fff; padding: 0; }
+    .sheet { border: none; max-width: none; padding: 16px 20px; }
+    .actions { display: none; }
+    .row .field { border: 1px solid #999; }
+    .row .label { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .kicker { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<div class="sheet">
+  <p class="kicker">3. ワーク②：各自でフェーズ2の取り組み内容について、考えてみる</p>
+  <h1>WORK 2｜自分のフェーズ2テーマ候補をつくる</h1>
+  <p class="subtitle">SC×AI キックオフセミナー ／ 7つの項目を埋めながら、自分のフェーズ2テーマ候補を具体化してみましょう</p>
+
+  <div class="meta">
+    <span><label>お名前</label> <input type="text" placeholder="　"></span>
+    <span><label>日付</label> <input type="text" placeholder="　年　月　日"></span>
+    <span><label>所属</label> <input type="text" placeholder="　"></span>
+  </div>
+
+  <div class="row">
+    <div class="label">テーマ</div>
+    <div class="field">
+      <textarea rows="1"></textarea>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="label">課題・理想像</div>
+    <div class="field">
+      <span class="hint">何を変えたいか？</span>
+      <textarea rows="2"></textarea>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="label">AIが行うべきこと</div>
+    <div class="field">
+      <span class="hint">AIに何をさせたい？ AI活用レベルは？</span>
+      <textarea rows="2"></textarea>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="label">必要なデータ</div>
+    <div class="field">
+      <span class="hint">既存データを活用？ 新規収集？</span>
+      <textarea rows="2"></textarea>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="label">判断基準</div>
+    <div class="field">
+      <span class="hint">AIに何を教え、人は何を判断する？</span>
+      <textarea rows="2"></textarea>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="label">実現方法</div>
+    <div class="field">
+      <span class="hint">越えるべき課題、ハードルは？ 検証の進め方</span>
+      <textarea rows="2"></textarea>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="label">成果の示し方</div>
+    <div class="field">
+      <span class="hint">業務改善、モデル、サービス、構想</span>
+      <textarea rows="2"></textarea>
+    </div>
+  </div>
+
+  <div class="note">
+    完璧な答えは不要です。まず「AIに何をさせ、人が何を判断するか」を言葉にすることが目的です。<br>
+    書ききれない項目があっても構いません。手が止まったところが、これから深めるべき論点です。
+  </div>
+</div>
+
+<div class="actions">
+  <button class="print" onclick="window.print()">🖨 印刷 / PDFとして保存</button>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WORK 1 AI活用5段階に仕分ける ── SC×AI キックオフセミナー</title>
+<style>
+  :root {
+    --main: #0b2f64;
+    --accent: #993C1D;
+    --text: #333333;
+    --line: #cccccc;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+    color: var(--text);
+    background: #f4f4f4;
+    line-height: 1.6;
+    margin: 0;
+    padding: 24px;
+  }
+  .sheet {
+    background: #ffffff;
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 40px 48px;
+    border: 1px solid var(--line);
+  }
+  .kicker {
+    background: var(--main);
+    color: #fff;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 8px 14px;
+    margin: 0 0 20px;
+  }
+  h1 {
+    color: var(--main);
+    font-size: 23px;
+    margin: 0 0 4px;
+  }
+  .subtitle { font-size: 13px; color: #666; margin: 0 0 24px; }
+
+  .meta {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+  .meta label { font-size: 13px; color: var(--main); font-weight: bold; }
+  .meta input {
+    font-family: inherit;
+    font-size: 15px;
+    border: none;
+    border-bottom: 2px solid var(--main);
+    padding: 4px 8px;
+    min-width: 160px;
+    background: transparent;
+    color: var(--text);
+  }
+
+  /* 各レベルの行：左＝説明カード、右＝記入欄 */
+  .row {
+    display: flex;
+    align-items: stretch;
+    gap: 14px;
+    margin-bottom: 12px;
+  }
+  .card {
+    flex: 1 1 0;
+    display: flex;
+    gap: 10px;
+    border: 1px solid var(--line);
+    padding: 10px 12px;
+  }
+  .badge {
+    flex: 0 0 44px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .card .body { flex: 1 1 auto; }
+  .card .name {
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--main);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+  }
+  .card .tag { font-size: 11px; color: var(--accent); font-weight: bold; white-space: nowrap; }
+  .card .desc { font-size: 11px; color: #666; margin-top: 2px; line-height: 1.4; }
+
+  .answer {
+    flex: 1 1 0;
+    display: flex;
+    align-items: stretch;
+  }
+  .answer textarea {
+    width: 100%;
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--text);
+    border: 1px solid var(--main);
+    padding: 8px 12px;
+    resize: vertical;
+    min-height: 62px;
+    background: #fff;
+  }
+  .answer textarea:focus { outline: 2px solid var(--accent); }
+
+  /* レベル別のアクセント色（バッジのみ。面は白基調を維持） */
+  .l5 .badge { background: #C8922B; }
+  .l4 .badge { background: #4E8A6B; }
+  .l3 .badge { background: #3F7A9E; }
+  .l2 .badge { background: #5B6BA6; }
+  .l1 .badge { background: #7C8290; }
+
+  .note {
+    font-size: 12px;
+    color: #666;
+    margin-top: 20px;
+    border-top: 1px solid var(--line);
+    padding-top: 12px;
+  }
+  .actions {
+    max-width: 1040px;
+    margin: 20px auto 0;
+    text-align: center;
+  }
+  button.print {
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: bold;
+    color: #fff;
+    background: var(--main);
+    border: none;
+    padding: 12px 28px;
+    cursor: pointer;
+  }
+  button.print:hover { opacity: 0.9; }
+
+  @media print {
+    body { background: #fff; padding: 0; }
+    .sheet { border: none; max-width: none; padding: 16px 20px; }
+    .actions { display: none; }
+    .answer textarea { border: 1px solid #999; }
+    .badge, .kicker { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<div class="sheet">
+  <p class="kicker">2. ワーク①：AIセミナーを振り返って、AI活用5段階を考えてみる</p>
+  <h1>WORK 1｜フェーズ1の成果物をAI活用5段階に仕分けてみましょう</h1>
+  <p class="subtitle">フェーズ1で各チームが上げたAI活用の具体例が、どのレベルにあたるかを仕分けてください（右の欄に書き込みます）</p>
+
+  <div class="meta">
+    <span><label>お名前</label> <input type="text" placeholder="　"></span>
+    <span><label>日付</label> <input type="text" placeholder="　年　月　日"></span>
+    <span><label>所属</label> <input type="text" placeholder="　"></span>
+  </div>
+
+  <div class="row l5">
+    <div class="card">
+      <div class="badge">L5</div>
+      <div class="body">
+        <div class="name"><span>Harness / Loop Engineering</span><span class="tag">継続改善</span></div>
+        <div class="desc">AIが安全に自律動作する足場を設計し、改善が回り続ける</div>
+      </div>
+    </div>
+    <div class="answer"><textarea rows="2"></textarea></div>
+  </div>
+
+  <div class="row l4">
+    <div class="card">
+      <div class="badge">L4</div>
+      <div class="body">
+        <div class="name"><span>マルチエージェント連携</span><span class="tag">横断・連携</span></div>
+        <div class="desc">役割の違う複数のAIを連携させ、横断的に処理する</div>
+      </div>
+    </div>
+    <div class="answer"><textarea rows="2"></textarea></div>
+  </div>
+
+  <div class="row l3">
+    <div class="card">
+      <div class="badge">L3</div>
+      <div class="body">
+        <div class="name"><span>エージェント構築</span><span class="tag">業務実行</span></div>
+        <div class="desc">AIに道具を持たせ、一連の作業を自分で実行させる</div>
+      </div>
+    </div>
+    <div class="answer"><textarea rows="2"></textarea></div>
+  </div>
+
+  <div class="row l2">
+    <div class="card">
+      <div class="badge">L2</div>
+      <div class="body">
+        <div class="name"><span>プロンプトエンジニアリング</span><span class="tag">安定化</span></div>
+        <div class="desc">指示や前提を作り込み、毎回同じ品質でAIの出力を安定させる</div>
+      </div>
+    </div>
+    <div class="answer"><textarea rows="2"></textarea></div>
+  </div>
+
+  <div class="row l1">
+    <div class="card">
+      <div class="badge">L1</div>
+      <div class="body">
+        <div class="name"><span>チャット・プロンプト</span><span class="tag">質問・生成</span></div>
+        <div class="desc">AIに話しかけ、その場で答え（文案・要約など）をもらう</div>
+      </div>
+    </div>
+    <div class="answer"><textarea rows="2"></textarea></div>
+  </div>
+</div>
+
+<div class="actions">
+  <button class="print" onclick="window.print()">🖨 印刷 / PDFとして保存</button>
+</div>
+
+</body>
+</html>

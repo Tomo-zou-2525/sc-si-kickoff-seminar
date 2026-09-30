@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ループ設計ワークシート ── SC×AI キックオフセミナー</title>
+<style>
+  :root {
+    --main: #0b2f64;
+    --accent: #993C1D;
+    --text: #333333;
+    --line: #cccccc;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+    color: var(--text);
+    background: #f4f4f4;
+    line-height: 1.6;
+    margin: 0;
+    padding: 24px;
+  }
+  .sheet {
+    background: #ffffff;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 48px;
+    border: 1px solid var(--line);
+  }
+  h1 {
+    color: var(--main);
+    font-size: 24px;
+    margin: 0 0 4px;
+  }
+  .subtitle { font-size: 13px; color: #666; margin: 0 0 20px; }
+
+  /* 図：上部に横長で配置 */
+  .diagram {
+    border: 1px solid var(--line);
+    padding: 12px;
+    margin-bottom: 8px;
+    background: #fff;
+  }
+  .diagram svg { width: 100%; height: auto; display: block; }
+  .diagram-cap { font-size: 11px; color: #888; text-align: center; margin: 4px 0 24px; }
+
+  .meta {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+  .meta label { font-size: 13px; color: var(--main); font-weight: bold; }
+  .meta input {
+    font-family: inherit;
+    font-size: 15px;
+    border: none;
+    border-bottom: 2px solid var(--main);
+    padding: 4px 8px;
+    min-width: 160px;
+    background: transparent;
+    color: var(--text);
+  }
+  .item { margin-bottom: 20px; }
+  .item .label {
+    font-weight: bold;
+    color: var(--main);
+    font-size: 15px;
+    margin-bottom: 6px;
+  }
+  .item .hint { font-size: 12px; color: #888; font-weight: normal; }
+  textarea {
+    width: 100%;
+    font-family: inherit;
+    font-size: 15px;
+    color: var(--text);
+    border: 2px solid var(--main);
+    border-radius: 0;
+    padding: 10px 12px;
+    resize: vertical;
+    min-height: 64px;
+    background: #fff;
+  }
+  textarea:focus { outline: 2px solid var(--accent); }
+  .accent textarea { border-color: var(--accent); }
+  .accent .label { color: var(--accent); }
+  .note {
+    font-size: 12px;
+    color: #666;
+    margin-top: 18px;
+    border-top: 1px solid var(--line);
+    padding-top: 12px;
+  }
+  .actions {
+    max-width: 1000px;
+    margin: 20px auto 0;
+    text-align: center;
+  }
+  button.print {
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: bold;
+    color: #fff;
+    background: var(--main);
+    border: none;
+    padding: 12px 28px;
+    cursor: pointer;
+  }
+  button.print:hover { opacity: 0.9; }
+
+  @media print {
+    body { background: #fff; padding: 0; }
+    .sheet { border: none; max-width: none; padding: 16px 20px; }
+    .actions { display: none; }
+    textarea { border: 1px solid #999; }
+    .diagram { border-color: #999; }
+  }
+</style>
+</head>
+<body>
+
+<div class="sheet">
+  <h1>ループ設計ワークシート</h1>
+  <p class="subtitle">SC×AI キックオフセミナー ／ 円環図をぐるりとひと回りさせるイメージで、自分の業務の4つの空欄を埋めてみましょう</p>
+
+  <!-- 参考：円環ループ設計図（スライド 6-7 と同じもの）。図中の空欄にも直接書き込めます -->
+  <div class="diagram">
+    <svg viewBox="20 50 820 310" xmlns="http://www.w3.org/2000/svg" role="img" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Noto Sans JP',sans-serif">
+      <title>書き込み式ループ設計ワークシート</title>
+      <desc>トリガー・AIにさせること・完了指標・人間の判断の4つの空欄に書き込み、循環として設計するワークシート</desc>
+      <defs>
+        <marker id="ws" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="#5F5E5A"/>
+        </marker>
+      </defs>
+
+      <text x="430" y="80" text-anchor="middle" style="font-size:16px" font-weight="700" fill="#993C1D">① いつ始める？（トリガー）</text>
+
+      <text x="720" y="215" text-anchor="middle" style="font-size:16px" font-weight="700" fill="#042C53">② AIに何をさせる？</text>
+
+      <text x="430" y="345" text-anchor="middle" style="font-size:16px" font-weight="700" fill="#993C1D">③ 何が揃えば「完了」？（完了指標）</text>
+
+      <text x="150" y="215" text-anchor="middle" style="font-size:16px" font-weight="700" fill="#2C2C2A">④ 人間が判断すること</text>
+
+      <path d="M560,90 Q690,120 715,190" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#ws)"/>
+      <path d="M715,240 Q690,315 560,335" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#ws)"/>
+      <path d="M300,335 Q170,315 145,240" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#ws)"/>
+      <path d="M145,190 Q170,120 300,90" fill="none" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#ws)"/>
+    </svg>
+  </div>
+  <p class="diagram-cap">▲ ①→②→③→④と矢印でひと回りする循環のイメージです。この流れに沿って、下の記入欄を埋めていきます</p>
+
+  <div class="meta">
+    <span><label>お名前</label> <input type="text" placeholder="　"></span>
+    <span><label>日付</label> <input type="text" placeholder="　年　月　日"></span>
+    <span><label>対象の業務</label> <input type="text" placeholder="例：来客データの集計"></span>
+  </div>
+
+  <div class="item accent">
+    <div class="label">① いつ始める？（トリガー） <span class="hint">どんなタイミングで動かすか（例：毎朝／データが届いたら）</span></div>
+    <textarea rows="2"></textarea>
+  </div>
+
+  <div class="item">
+    <div class="label">② AIに何をさせる？ <span class="hint">任せる作業（例：たたき台・下書き・データ作成）</span></div>
+    <textarea rows="3"></textarea>
+  </div>
+
+  <div class="item accent">
+    <div class="label">③ 何が揃えば「完了」？（完了指標） <span class="hint">数字・期日・状態で具体的に（例：◯月までに◯時間→◯時間）</span></div>
+    <textarea rows="3"></textarea>
+  </div>
+
+  <div class="item">
+    <div class="label">④ 人間が判断すること <span class="hint">最終的に誰が・何を決めるか</span></div>
+    <textarea rows="2"></textarea>
+  </div>
+
+  <div class="note">
+    4つの空欄が埋まり、①→②→③→④とひと回りすれば、それがあなたの業務の「ループ設計」の第一歩です。<br>
+    完璧な答えは不要です。まず「どこにAIを、どこに人間を置くか」を言葉にすることが目的です。
+  </div>
+</div>
+
+<div class="actions">
+  <button class="print" onclick="window.print()">🖨 印刷 / PDFとして保存</button>
+</div>
+
+</body>
+</html>
