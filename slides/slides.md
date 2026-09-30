@@ -79,38 +79,59 @@ style: |
 
 
 ---
-layout: two-cols-header
+layout: default
 ---
 
 # 本セミナーの全体像
 
 <div class="text-xs opacity-60 mt-4">前半で「知り」、後半で「使う・考える」。最後は、ご自身の業務で試すところまでを目指します。</div>
 
-::left::
+<div class="flex flex-col gap-4 mt-5">
 
-<div class="text-base leading-relaxed mt-4">
+<div class="flex items-baseline gap-3">
+<span class="font-bold whitespace-nowrap" style="color:#0b2f64; min-width:82px">第0章</span>
+<span class="text-base">はじめに ─ 論点整理</span>
+</div>
 
-<h3> 第0章</h3><h4> -> はじめに ─ 論点整理</h4>
-<br>
-<h3> 第1章</h3><h4> -> AIとは何か ─ 定義と歴史</h4>
-<br>
-<h3> 第2章</h3><h4> -> 生成AIとは何か ─ 仕組みを知る</h4>
-<br>
-<h3> 第3章</h3><h4> -> AI活用の5段階レベル ─ 使い方の地図</h4>
-<br>
+<div class="flex items-baseline gap-3">
+<span class="font-bold whitespace-nowrap" style="color:#0b2f64; min-width:82px">第1章</span>
+<span class="text-base">AIとは何か ─ 定義と歴史</span>
+</div>
+
+<div class="flex items-baseline gap-3">
+<span class="font-bold whitespace-nowrap" style="color:#0b2f64; min-width:82px">第2章</span>
+<span class="text-base">生成AIとは何か ─ 仕組みを知る</span>
+</div>
+
+<div class="flex items-baseline gap-3">
+<span class="font-bold whitespace-nowrap" style="color:#0b2f64; min-width:82px">第3章</span>
+<span class="text-base">AI活用の5段階レベル ─ 使い方の地図</span>
+</div>
 
 </div>
 
-::right::
 
-<div class="text-base leading-relaxed mt-4">
-<h3> 第4章</h3><h4> -> Loop/Harness Engineering ─ 深く理解する</h4>
-<br>
-<h3> 第5章</h3><h4> -> Work Slop ─ 心構えと注意点</h4>
-<br>
-<h3> 第6章</h3><h4> -> アイデアソンへ向けて ─ 自分でやってみる</h4>
-<br>
-<h3> Appendix</h3><h4> -> もっと知りたい人へ</h4>
+<div class="flex flex-col gap-4 mt-5">
+
+<div class="flex items-baseline gap-3">
+<span class="font-bold whitespace-nowrap" style="color:#0b2f64; min-width:82px">第4章</span>
+<span class="text-base">Loop / Harness Engineering ─ 深く理解する</span>
+</div>
+
+<div class="flex items-baseline gap-3">
+<span class="font-bold whitespace-nowrap" style="color:#0b2f64; min-width:82px">第5章</span>
+<span class="text-base">Work Slop ─ 心構えと注意点</span>
+</div>
+
+<div class="flex items-baseline gap-3">
+<span class="font-bold whitespace-nowrap" style="color:#0b2f64; min-width:82px">第6章</span>
+<span class="text-base">アイデアソンへ向けて ─ 自分でやってみる</span>
+</div>
+
+<div class="flex items-baseline gap-3">
+<span class="font-bold whitespace-nowrap" style="color:#993C1D; min-width:82px">Appendix</span>
+<span class="text-base">もっと知りたい人へ</span>
+</div>
 
 </div>
 
